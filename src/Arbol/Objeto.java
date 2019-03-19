@@ -12,24 +12,75 @@ public class Objeto {
     private String ancho;
     private String borde;
     
-    private final Instruccion ins1;
-    private Instruccion ins2;
-    private Instruccion ins3;
+    public Objeto(Tipo tipo, String id) {
+        this.tipo=tipo;
+        this.id=id;
+    }
 
-    public Objeto(Instruccion ins1, Instruccion ins2, Instruccion ins3) {
-        this.ins1 = ins1;
-        this.ins2 = ins2;
-        this.ins3 = ins3;
+    public Tipo getTipo() {
+        return tipo;
     }
-    public Objeto(Instruccion ins1, Instruccion ins2) {
-        this.ins1 = ins1;
-        this.ins2 = ins2;
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
-    public Objeto(Instruccion ins1) {
-        this.ins1 = ins1;
+
+    public String getId() {
+        return id;
     }
-    
-    
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
+
+    public String getAlineacion() {
+        return alineacion;
+    }
+
+    public void setAlineacion(String alineacion) {
+        this.alineacion = alineacion;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getAlto() {
+        return alto;
+    }
+
+    public void setAlto(String alto) {
+        this.alto = alto;
+    }
+
+    public String getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(String ancho) {
+        this.ancho = ancho;
+    }
+
+    public String getBorde() {
+        return borde;
+    }
+
+    public void setBorde(String borde) {
+        this.borde = borde;
+    }
+
     
     public static enum Tipo{
         PARRAFO,
