@@ -1,0 +1,209 @@
+package analizadores;
+import java_cup.runtime.*;
+import Arbol.*;
+import java.util.LinkedList;
+//----------------------------------------------MÉTODOS RECUPERACIÓN DE ERRORES--------------------------------------------//
+parser code
+{:
+    public Arbol AST;
+    public Arbol getAST(){
+        return AST;
+    }
+
+    public void syntax_error(Symbol s)
+    {
+       try{
+            String lexema = s.value.toString();
+            int fila = s.right+1;
+            int columna = s.left;
+            int tipo = s.sym;
+
+            System.out.println("Error sintáctico recuperado");
+            System.out.println("Lexema:"+lexema);
+            System.out.println("Fila:"+fila);
+            System.out.println("Columna:"+columna);
+            System.out.println("tipo:"+tipo);
+            //action_obj.err.addE("SINTACTICO", lexema, fila, columna, "Se esperaba otra cosa");
+       }catch(NullPointerException ex){}
+    }
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+       try{
+            String lexema = s.value.toString();
+            int fila = s.right+1;
+            int columna = s.left;
+            int tipo = s.sym;
+
+            System.out.println("Error sintáctico NO recuperado");
+            System.out.println("Lexema:"+lexema);
+            System.out.println("Fila:"+fila);
+            System.out.println("Columna:"+columna);
+            System.out.println("tipo:"+tipo);
+       }catch(NullPointerException ex){}
+    }
+:}
+
+action code
+{:
+
+:}
+
+//---------------------> TERMINALES
+terminal String com_a,com_c,cab_a,cab_c,tit_a,tit_c,cue_a,cue_c,esp_a,esp_c,par_a,par_c,salt,tea_a,tea_c,teb_a,teb_c,ima_a,ima_c,bot_a,bot_c,tab_a,tab_c;
+terminal String fil_a,fil_c,colc_a,colc_c,col_a,col_c,tru,fals,fond,alin,path,alto,anch,ide,text,bord,hs_a,echo,ife,elsee,repet,inser,cre_par,setA,getA;
+terminal String setC,getC,cre_tea,cre_teb,cre_img,setP,getP,setAl,getAl,setAn,getAn,cre_tab,setBo,getBo,cre_bot,setT,getT,cli_bot,hs_c;
+terminal String mas,men,por,div,igu,coma,pun,pyc,parA,parC,llavA,llavC,corA,corC,lesigu,greigu,les,gre,diff,igua,and,or,not,cie,num,dec,cad,idvar;
+terminal String idobj,texto,umen;
+
+non terminal INICIO;
+non terminal LinkedList<Instruccion> COMPI,ALLS,TESHS,FILAS,COLUMNS,DATAS,SENTS;
+non terminal Instruccion CABECERA,CUERPO,ALL,PARRAFO,TESH,TEXTOA,TEXTOB,ESPACIO,IMAGEN,BOTTON,TABLA,FILA,COLUMN,DATA,SCRIPT,SENT,ECHO,OPER,DECL;
+non terminal Instruccion IF,REPETIR,INSERTAR;
+non terminal String TITULO,FONDO,SALTO,ALIGN,IMG;
+non terminal LinkedList<String> IMGS;
+
+
+non terminal GET_PART,SET_PART,CRE_PART,ARRAY,ARRAYS;
+
+precedence left pun;
+
+precedence left or;
+precedence left and;
+precedence right not;
+precedence left igua,diff,les,gre,lesigu,greigu;
+
+precedence left mas,men;
+precedence left por,div;
+precedence right umen;
+
+
+start with INICIO;
+
+
+/* ------------------- 3ra Area: Reglas Semanticas -------------------*/
+INICIO::= COMPI:a                                                            {:parser.AST=new Arbol(a);:};
+COMPI::= com_a CABECERA:a CUERPO:b com_c                                     {:RESULT=new LinkedList<>();RESULT.add(a);RESULT.add(b);:}
+       | com_a CUERPO:a CABECERA:b com_c                                     {:RESULT=new LinkedList<>();RESULT.add(a);RESULT.add(b);:};
+CABECERA::= cab_a TITULO:a cab_c                                             {:RESULT=new Titulo(a);:};
+TITULO::= tit_a texto:a tit_c                                                {:RESULT=new String(a);:};
+CUERPO::= cue_a FONDO:a cie ALLS:b cue_c                                     {:RESULT=new Cuerpo(a,b);:}
+        | cue_a cie ALLS:b cue_c                                             {:RESULT=new Cuerpo(b);:};
+FONDO::= fond igu cad:a                                                      {:RESULT=a;:};
+ALLS::= ALLS:a ALL:b                                                         {:RESULT=a;RESULT.add(b);:}
+      | ALL:b                                                                {:RESULT=new LinkedList<>();RESULT.add(b);:}; 
+ALL::= PARRAFO:p                                                             {:RESULT=p;:}
+     | ESPACIO:e                                                             {:RESULT=e;:}
+     | SALTO                                                                 {:RESULT=new Salto();:}
+     | TEXTOA:a                                                              {:RESULT=a;:}
+     | TEXTOB:a                                                              {:RESULT=a;:}
+     | IMAGEN:a                                                              {:RESULT=a;:}
+     | BOTTON:a                                                              {:RESULT=a;:}
+     | TABLA:a                                                               {:RESULT=a;:}
+     | SCRIPT:a                                                              {:RESULT=a;:}
+     | texto:a                                                               {:RESULT=new Texto(a);:}
+     | error;
+ESPACIO::= esp_a ALLS:a esp_c                                                {:RESULT=new Espacio(a);:};
+PARRAFO::= par_a ALIGN:a cie TESHS:b par_c                                   {:RESULT=new Parrafo(a,b);:}
+         | par_a cie TESHS:b par_c                                           {:RESULT=new Parrafo(b);:};
+ALIGN::= alin igu cad:a                                                      {:RESULT=a;:};
+SALTO::= salt                                                                {:/*YA ESTA HECHO*/:};
+TESHS::= TESHS:a TESH:b                                                      {:RESULT=a;RESULT.add(b);:}
+       | TESH:b                                                              {:RESULT=new LinkedList<>();RESULT.add(b);:};
+TESH::=texto:a                                                               {:RESULT=new Texto(a);:}
+      |SCRIPT:a                                                              {:RESULT=a;:};
+TEXTOA::= tea_a TESHS:a tea_c                                                {:RESULT=new TextoA(a);:};
+TEXTOB::= teb_a TESHS:a teb_c                                                {:RESULT=new TextoB(a);:};
+IMAGEN::= ima_a IMGS:a cie ima_c                                             {:RESULT=new Imagen(a);:};
+IMGS::= IMGS:a IMG:b                                                         {:RESULT=a;RESULT.add(b);:}
+      | IMG:b                                                                {:RESULT=new LinkedList<>();RESULT.add(b);:};
+IMG::= alto igu num:a                                                        {:RESULT="3"+a;:}
+     | anch igu num:a                                                        {:RESULT="2"+a;:}
+     | path igu cad:a                                                        {:RESULT="1"+a;:};
+BOTTON::= bot_a ide igu cad:a text igu cad:b cie bot_c                       {:RESULT=new Boton(a,b);:}
+        | bot_a text igu cad:b ide igu cad:a cie bot_c                       {:RESULT=new Boton(a,b);:};
+TABLA::= tab_a bord igu tru cie FILAS:a tab_c                                {:RESULT=new Tabla(true,a);:}
+       | tab_a bord igu fals cie FILAS:a tab_c                               {:RESULT=new Tabla(false,a);:}
+       | tab_a cie FILAS:a tab_c                                             {:RESULT=new Tabla(a);:};
+FILAS::= FILAS:a FILA:b                                                      {:RESULT=a;RESULT.add(b);:}
+       | FILA:b                                                              {:RESULT=new LinkedList<>();RESULT.add(b);:};
+FILA::= fil_a COLUMNS:a fil_c                                                {:RESULT=new Fila(a);:};
+COLUMNS::= COLUMNS:a COLUMN:b                                                {:RESULT=a;RESULT.add(b);:}
+         | COLUMN:b                                                          {:RESULT=new LinkedList<>();RESULT.add(b);:};
+COLUMN::= col_a DATAS:a col_c                                                {:RESULT=new Columna(a);:}
+        | colc_a DATAS:a colc_c                                              {:RESULT=new Columna(a);:};
+DATAS::= DATAS:a DATA:b                                                      {:RESULT=a;RESULT.add(b);:}
+       | DATA:b                                                              {:RESULT=new LinkedList<>();RESULT.add(b);:};
+DATA::= SALTO                                                                {:RESULT=new Salto();:}
+       |ESPACIO:a                                                            {:RESULT=a;:}
+       |PARRAFO:a                                                            {:RESULT=a;:}
+       |IMAGEN:a                                                             {:RESULT=a;:}
+       |BOTTON:a                                                             {:RESULT=a;:}
+       |texto:a                                                              {:RESULT=new Texto(a);:}
+       |SCRIPT:a                                                             {:RESULT=a;:};
+SCRIPT::=hs_a SENTS:a hs_c                                                   {:RESULT=new Script(a);:};
+SENTS::= SENTS:a SENT:b                                                      {:RESULT=a;RESULT.add(b);:}
+       | SENT:b                                                              {:RESULT=new LinkedList<>();RESULT.add(b);:};
+SENT::= DECL:a                                                               {:RESULT=a;:}
+      | ECHO:a                                                               {:RESULT=a;:}
+      | IF:a                                                                 {:RESULT=a;:}
+      | REPETIR:a                                                            {:RESULT=a;:}
+      | INSERTAR:a                                                           {:RESULT=a;:}
+      | SET_PART                                                             {::}
+      | CRE_PART                                                             {::};
+
+DECL::=idvar:a igu OPER:b pyc                                                {:RESULT=new Declaracion(a,b);:};
+OPER::= men OPER:a                                                           {:RESULT=new Operacion(Operacion.Oper.NEG,a);:}%prec umen
+      | OPER:a mas OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.SUMA,a,b);:}
+      | OPER:a men OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.RESTA,a,b);:}
+      | OPER:a por OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.MULT,a,b);:}
+      | OPER:a div OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.DIV,a,b);:}
+      | OPER:a les OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.MEN,a,b);:}
+      | OPER:a gre OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.MAY,a,b);:}
+      | OPER:a lesigu OPER:b                                                 {:RESULT=new Operacion(Operacion.Oper.MENIGU,a,b);:}
+      | OPER:a greigu OPER:b                                                 {:RESULT=new Operacion(Operacion.Oper.MAYIGU,a,b);:}
+      | OPER:a and OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.AND,a,b);:}
+      | OPER:a or OPER:b                                                     {:RESULT=new Operacion(Operacion.Oper.OR,a,b);:}
+      | OPER:a diff OPER:b                                                   {:RESULT=new Operacion(Operacion.Oper.DIFF,a,b);:}
+      | OPER:a igua OPER:b                                                   {:RESULT=new Operacion(Operacion.Oper.IGU,a,b);:}
+      | not OPER:a                                                           {:RESULT=new Operacion(Operacion.Oper.NOT,a);:}
+      | OPER:a pun OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.CONCAT,a,b);:}
+      | parA OPER:a parC                                                     {:RESULT=a;:}
+      | num:a                                                                {:RESULT=new Operacion(Integer.valueOf(a));:}
+      | dec:a                                                                {:RESULT=new Operacion(Double.valueOf(a));:}
+      | cad:a                                                                {:RESULT=new Operacion(Operacion.Oper.CAD,a);:}
+      | idvar:a                                                              {:RESULT=new Operacion(Operacion.Oper.ID,a);:}
+      | tru:a                                                                {:RESULT=new Operacion(Operacion.Oper.TRUE,a);:}
+      | fals:a                                                               {:RESULT=new Operacion(Operacion.Oper.FALSE,a);:}
+      | GET_PART:a                                                           {::};
+
+ECHO::= echo OPER:a pyc                                                      {:RESULT=new Echo(a);:};
+IF::= ife parA OPER:a parC llavA SENTS:b llavC                               {:RESULT=new If_Sent(a,b);:}
+    | ife parA OPER:a parC llavA SENTS:b llavC elsee llavA SENTS:c llavC     {:RESULT=new If_Sent(a,b,c);:};
+REPETIR::= repet parA OPER:a parC llavA SENTS:b llavC                        {:RESULT=new Repetir(a,b);:};
+INSERTAR::= idobj pun inser parA parC pyc;
+CRE_PART::= idobj igu cre_par parA OPER coma OPER parC pyc
+          | idobj igu cre_par parA OPER parC pyc
+          | idobj igu cre_tea parA OPER parC pyc
+          | idobj igu cre_teb parA OPER parC pyc
+          | idobj igu cre_img parA OPER coma OPER coma OPER parC pyc
+          | idobj igu cre_img parA OPER parC pyc
+          | idobj igu cre_tab parA ARRAYS parC pyc
+          | idobj igu cre_bot parA OPER coma OPER parC pyc;
+SET_PART::=idobj pun setA parA OPER parC pyc
+          |idobj pun setC parA OPER parC pyc
+          |idobj pun setP parA OPER parC pyc
+          |idobj pun setAl parA OPER parC pyc
+          |idobj pun setAn parA OPER parC pyc
+          |idobj pun setBo parA OPER parC pyc
+          |idobj pun setT parA OPER parC pyc
+          |idobj pun cli_bot parA OPER parC pyc;
+GET_PART::=idobj pun getA parA parC
+          |idobj pun getC parA parC
+          |idobj pun getP parA parC
+          |idobj pun getAl parA parC
+          |idobj pun getAn parA parC
+          |idobj pun getBo parA parC
+          |idobj pun getT parA parC;
+ARRAYS::= ARRAYS coma corA ARRAY corC
+        | corA ARRAY corC;
+ARRAY::= DATAS coma OPER
+       | OPER;
