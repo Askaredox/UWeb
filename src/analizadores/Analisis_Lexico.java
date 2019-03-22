@@ -4,7 +4,7 @@
 //-------------> Parquetes, Importaciones
 package analizadores;
 import java_cup.runtime.*;
-//import Arbol.Errores;
+import Arbol.Tokens;
 
 /*-------------------- 2da Area: Opciones y Declaraciones --------------------*/
 
@@ -66,29 +66,29 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\3\0\2\1\1\2\1\3\1\1\1\4\6\1\1\5"+
-    "\1\6\1\7\1\3\1\10\1\11\1\12\1\13\1\14"+
-    "\2\1\1\15\11\1\1\5\1\16\1\17\1\20\1\21"+
-    "\1\22\2\1\1\23\1\24\1\25\1\26\1\27\1\0"+
-    "\1\30\14\0\1\31\10\0\1\32\1\33\1\34\2\0"+
-    "\1\35\1\36\2\0\1\37\6\0\1\40\1\41\1\42"+
-    "\1\43\1\30\40\0\1\44\2\45\12\0\1\46\30\0"+
-    "\1\47\1\50\1\0\1\51\3\0\1\52\7\0\1\53"+
-    "\1\54\13\0\1\46\32\0\1\55\1\56\1\57\1\60"+
-    "\1\61\1\0\1\45\43\0\1\62\2\0\1\63\1\0"+
-    "\1\64\42\0\1\65\1\66\2\0\1\67\1\0\1\70"+
-    "\14\0\1\71\1\0\1\72\1\0\1\73\4\0\1\74"+
-    "\1\0\1\75\3\0\1\76\5\0\1\77\2\0\1\100"+
-    "\2\0\1\101\2\0\1\102\1\0\1\103\1\104\1\105"+
-    "\7\0\1\106\2\0\1\107\1\110\1\111\2\0\1\112"+
-    "\1\113\1\114\2\0\1\115\1\0\1\116\1\0\1\117"+
-    "\1\120\1\121\1\122\2\0\1\123\13\0\1\124\2\0"+
-    "\1\125\1\126\1\127\1\130\1\131\2\0\1\132\1\133"+
-    "\1\0\1\134\4\0\1\135\1\136\1\0\1\137\1\140"+
-    "\1\141\4\0\1\142\1\143\1\0\1\144\1\0\1\145"+
-    "\1\146";
+    "\1\6\1\7\1\1\1\3\1\10\1\11\1\12\1\13"+
+    "\1\14\2\1\1\15\11\1\1\5\1\16\1\17\1\20"+
+    "\1\21\1\22\2\1\1\23\1\24\1\25\1\26\1\27"+
+    "\1\0\1\30\14\0\1\31\10\0\1\32\2\0\1\33"+
+    "\1\34\1\35\2\0\1\36\1\37\2\0\1\40\6\0"+
+    "\1\41\1\42\1\43\1\44\1\30\40\0\1\32\1\45"+
+    "\2\46\12\0\1\47\30\0\1\50\1\51\1\0\1\52"+
+    "\3\0\1\53\7\0\1\54\1\55\13\0\1\47\32\0"+
+    "\1\56\1\57\1\60\1\61\1\62\1\0\1\46\43\0"+
+    "\1\63\2\0\1\64\1\0\1\65\42\0\1\66\1\67"+
+    "\2\0\1\70\1\0\1\71\14\0\1\72\1\0\1\73"+
+    "\1\0\1\74\4\0\1\75\1\0\1\76\3\0\1\77"+
+    "\5\0\1\100\2\0\1\101\2\0\1\102\2\0\1\103"+
+    "\1\0\1\104\1\105\1\106\7\0\1\107\2\0\1\110"+
+    "\1\111\1\112\2\0\1\113\1\114\1\115\2\0\1\116"+
+    "\1\0\1\117\1\0\1\120\1\121\1\122\1\123\2\0"+
+    "\1\124\13\0\1\125\2\0\1\126\1\127\1\130\1\131"+
+    "\1\132\2\0\1\133\1\134\1\0\1\135\4\0\1\136"+
+    "\1\137\1\0\1\140\1\141\1\142\4\0\1\143\1\144"+
+    "\1\0\1\145\1\0\1\146\1\147";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[431];
+    int [] result = new int[436];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -115,61 +115,62 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\70\0\160\0\250\0\340\0\250\0\u0118\0\u0150"+
     "\0\250\0\u0188\0\u01c0\0\u01f8\0\u0230\0\u0268\0\u02a0\0\250"+
-    "\0\u02d8\0\250\0\u0310\0\u0348\0\u0380\0\u03b8\0\u03f0\0\250"+
-    "\0\u0428\0\u0460\0\250\0\u0498\0\u04d0\0\u0508\0\u0540\0\u0578"+
-    "\0\u05b0\0\u05e8\0\u0620\0\u0658\0\u0690\0\250\0\250\0\250"+
-    "\0\250\0\250\0\u06c8\0\u0700\0\250\0\250\0\250\0\250"+
-    "\0\250\0\340\0\250\0\u0738\0\u0770\0\u07a8\0\u07e0\0\u0818"+
-    "\0\u0850\0\u0888\0\u08c0\0\u08f8\0\u0930\0\u0968\0\u09a0\0\250"+
-    "\0\u09d8\0\u0a10\0\u0a48\0\u0a80\0\u0ab8\0\u0af0\0\u0b28\0\u0b60"+
-    "\0\250\0\250\0\250\0\u0b98\0\u0bd0\0\u0c08\0\u0c40\0\u0c78"+
-    "\0\u0cb0\0\250\0\u0ce8\0\u0d20\0\u0d58\0\u0d90\0\u0dc8\0\u0e00"+
-    "\0\250\0\250\0\250\0\250\0\340\0\u0e38\0\u0e70\0\u0ea8"+
-    "\0\u0ee0\0\u0f18\0\u0f50\0\u0f88\0\u0fc0\0\u0ff8\0\u1030\0\u1068"+
-    "\0\u10a0\0\u10d8\0\u1110\0\u1148\0\u1180\0\u11b8\0\u11f0\0\u1228"+
-    "\0\u1260\0\u1298\0\u12d0\0\u1308\0\u1340\0\u1378\0\u13b0\0\u13e8"+
-    "\0\u1420\0\u1458\0\u1490\0\u14c8\0\u1500\0\u0b60\0\250\0\u1538"+
-    "\0\u1570\0\u15a8\0\u15e0\0\u1618\0\u1650\0\u1688\0\u16c0\0\u16f8"+
-    "\0\u1730\0\u1768\0\250\0\u17a0\0\u17d8\0\u1810\0\u1848\0\u1880"+
-    "\0\u18b8\0\u18f0\0\u1928\0\u1960\0\u1998\0\u19d0\0\u1a08\0\u1a40"+
-    "\0\u1a78\0\u1ab0\0\u1ae8\0\u1b20\0\u1b58\0\u1b90\0\u1bc8\0\u1c00"+
-    "\0\u1c38\0\u1c70\0\u1ca8\0\250\0\250\0\u1ce0\0\250\0\u1d18"+
-    "\0\u1d50\0\u1d88\0\250\0\u1dc0\0\u1df8\0\u1e30\0\u1e68\0\u1ea0"+
-    "\0\u1ed8\0\u1f10\0\250\0\250\0\u1f48\0\u1f80\0\u1fb8\0\u1ff0"+
-    "\0\u2028\0\u2060\0\u2098\0\u20d0\0\u2108\0\u2140\0\u2178\0\u0ea8"+
-    "\0\u21b0\0\u21e8\0\u2220\0\u2258\0\u2290\0\u22c8\0\u2300\0\u2338"+
-    "\0\u2370\0\u23a8\0\u23e0\0\u2418\0\u2450\0\u2488\0\u24c0\0\u24f8"+
-    "\0\u2530\0\u2568\0\u25a0\0\u25d8\0\u2610\0\u2648\0\u2680\0\u26b8"+
-    "\0\u26f0\0\u2728\0\250\0\250\0\250\0\250\0\250\0\u2760"+
-    "\0\u2760\0\u2798\0\u27d0\0\u2808\0\u2840\0\u2878\0\u28b0\0\u28e8"+
-    "\0\u2920\0\u2958\0\u2990\0\u29c8\0\u2a00\0\u2a38\0\u2a70\0\u2aa8"+
-    "\0\u2ae0\0\u2b18\0\u2b50\0\u2b88\0\u2bc0\0\u2bf8\0\u2c30\0\u2c68"+
-    "\0\u2ca0\0\u2cd8\0\u2d10\0\u2d48\0\u2d80\0\u2db8\0\u2df0\0\u2e28"+
-    "\0\u2e60\0\u2e98\0\u2ed0\0\u2f08\0\250\0\u2f40\0\u2f78\0\250"+
-    "\0\u2fb0\0\250\0\u2fe8\0\u3020\0\u3058\0\u3090\0\u30c8\0\u3100"+
-    "\0\u3138\0\u3170\0\u31a8\0\u31e0\0\u3218\0\u3250\0\u3288\0\u32c0"+
-    "\0\u32f8\0\u3330\0\u3368\0\u33a0\0\u33d8\0\u3410\0\u3448\0\u3480"+
-    "\0\u34b8\0\u34f0\0\u3528\0\u3560\0\u3598\0\u35d0\0\u3608\0\u3640"+
-    "\0\u3678\0\u36b0\0\u36e8\0\u3720\0\250\0\250\0\u3758\0\u3790"+
-    "\0\250\0\u37c8\0\250\0\u3800\0\u3838\0\u3870\0\u38a8\0\u38e0"+
-    "\0\u3918\0\u3950\0\u3988\0\u39c0\0\u39f8\0\u3a30\0\u3a68\0\250"+
-    "\0\u3aa0\0\250\0\u3ad8\0\250\0\u3b10\0\u3b48\0\u3b80\0\u3bb8"+
-    "\0\250\0\u3bf0\0\250\0\u3c28\0\u3c60\0\u3c98\0\250\0\u3cd0"+
-    "\0\u3d08\0\u3d40\0\u3d78\0\u3db0\0\250\0\u3de8\0\u3e20\0\250"+
-    "\0\u3e58\0\u3e90\0\250\0\u3ec8\0\u3f00\0\250\0\u3f38\0\250"+
-    "\0\250\0\250\0\u3f70\0\u3fa8\0\u3fe0\0\u4018\0\u4050\0\u4088"+
-    "\0\u40c0\0\250\0\u40f8\0\u4130\0\250\0\250\0\250\0\u4168"+
-    "\0\u41a0\0\250\0\250\0\250\0\u41d8\0\u4210\0\250\0\u4248"+
-    "\0\250\0\u4280\0\250\0\250\0\250\0\250\0\u42b8\0\u42f0"+
-    "\0\250\0\u4328\0\u4360\0\u4398\0\u43d0\0\u4408\0\u4440\0\u4478"+
-    "\0\u44b0\0\u44e8\0\u4520\0\u4558\0\250\0\u4590\0\u45c8\0\250"+
-    "\0\250\0\250\0\250\0\250\0\u4600\0\u4638\0\250\0\250"+
-    "\0\u4670\0\250\0\u46a8\0\u46e0\0\u4718\0\u4750\0\250\0\250"+
-    "\0\u4788\0\250\0\250\0\250\0\u47c0\0\u47f8\0\u4830\0\u4868"+
-    "\0\250\0\250\0\u48a0\0\250\0\u48d8\0\250\0\250";
+    "\0\u02d8\0\250\0\u0310\0\u0348\0\u0380\0\u03b8\0\u03f0\0\u0428"+
+    "\0\250\0\u0460\0\u0498\0\250\0\u04d0\0\u0508\0\u0540\0\u0578"+
+    "\0\u05b0\0\u05e8\0\u0620\0\u0658\0\u0690\0\u06c8\0\250\0\250"+
+    "\0\250\0\250\0\250\0\u0700\0\u0738\0\250\0\250\0\250"+
+    "\0\250\0\250\0\340\0\250\0\u0770\0\u07a8\0\u07e0\0\u0818"+
+    "\0\u0850\0\u0888\0\u08c0\0\u08f8\0\u0930\0\u0968\0\u09a0\0\u09d8"+
+    "\0\250\0\u0a10\0\u0a48\0\u0a80\0\u0ab8\0\u0af0\0\u0b28\0\u0b60"+
+    "\0\u0310\0\250\0\u0b98\0\u0bd0\0\250\0\250\0\250\0\u0c08"+
+    "\0\u0c40\0\u0c78\0\u0cb0\0\u0ce8\0\u0d20\0\250\0\u0d58\0\u0d90"+
+    "\0\u0dc8\0\u0e00\0\u0e38\0\u0e70\0\250\0\250\0\250\0\250"+
+    "\0\340\0\u0ea8\0\u0ee0\0\u0f18\0\u0f50\0\u0f88\0\u0fc0\0\u0ff8"+
+    "\0\u1030\0\u1068\0\u10a0\0\u10d8\0\u1110\0\u1148\0\u1180\0\u11b8"+
+    "\0\u11f0\0\u1228\0\u1260\0\u1298\0\u12d0\0\u1308\0\u1340\0\u1378"+
+    "\0\u13b0\0\u13e8\0\u1420\0\u1458\0\u1490\0\u14c8\0\u1500\0\u1538"+
+    "\0\u1570\0\u0310\0\u0bd0\0\250\0\u15a8\0\u15e0\0\u1618\0\u1650"+
+    "\0\u1688\0\u16c0\0\u16f8\0\u1730\0\u1768\0\u17a0\0\u17d8\0\250"+
+    "\0\u1810\0\u1848\0\u1880\0\u18b8\0\u18f0\0\u1928\0\u1960\0\u1998"+
+    "\0\u19d0\0\u1a08\0\u1a40\0\u1a78\0\u1ab0\0\u1ae8\0\u1b20\0\u1b58"+
+    "\0\u1b90\0\u1bc8\0\u1c00\0\u1c38\0\u1c70\0\u1ca8\0\u1ce0\0\u1d18"+
+    "\0\250\0\250\0\u1d50\0\250\0\u1d88\0\u1dc0\0\u1df8\0\250"+
+    "\0\u1e30\0\u1e68\0\u1ea0\0\u1ed8\0\u1f10\0\u1f48\0\u1f80\0\250"+
+    "\0\250\0\u1fb8\0\u1ff0\0\u2028\0\u2060\0\u2098\0\u20d0\0\u2108"+
+    "\0\u2140\0\u2178\0\u21b0\0\u21e8\0\u0f18\0\u2220\0\u2258\0\u2290"+
+    "\0\u22c8\0\u2300\0\u2338\0\u2370\0\u23a8\0\u23e0\0\u2418\0\u2450"+
+    "\0\u2488\0\u24c0\0\u24f8\0\u2530\0\u2568\0\u25a0\0\u25d8\0\u2610"+
+    "\0\u2648\0\u2680\0\u26b8\0\u26f0\0\u2728\0\u2760\0\u2798\0\250"+
+    "\0\250\0\250\0\250\0\250\0\u27d0\0\u27d0\0\u2808\0\u2840"+
+    "\0\u2878\0\u28b0\0\u28e8\0\u2920\0\u2958\0\u2990\0\u29c8\0\u2a00"+
+    "\0\u2a38\0\u2a70\0\u2aa8\0\u2ae0\0\u2b18\0\u2b50\0\u2b88\0\u2bc0"+
+    "\0\u2bf8\0\u2c30\0\u2c68\0\u2ca0\0\u2cd8\0\u2d10\0\u2d48\0\u2d80"+
+    "\0\u2db8\0\u2df0\0\u2e28\0\u2e60\0\u2e98\0\u2ed0\0\u2f08\0\u2f40"+
+    "\0\u2f78\0\250\0\u2fb0\0\u2fe8\0\250\0\u3020\0\250\0\u3058"+
+    "\0\u3090\0\u30c8\0\u3100\0\u3138\0\u3170\0\u31a8\0\u31e0\0\u3218"+
+    "\0\u3250\0\u3288\0\u32c0\0\u32f8\0\u3330\0\u3368\0\u33a0\0\u33d8"+
+    "\0\u3410\0\u3448\0\u3480\0\u34b8\0\u34f0\0\u3528\0\u3560\0\u3598"+
+    "\0\u35d0\0\u3608\0\u3640\0\u3678\0\u36b0\0\u36e8\0\u3720\0\u3758"+
+    "\0\u3790\0\250\0\250\0\u37c8\0\u3800\0\250\0\u3838\0\250"+
+    "\0\u3870\0\u38a8\0\u38e0\0\u3918\0\u3950\0\u3988\0\u39c0\0\u39f8"+
+    "\0\u3a30\0\u3a68\0\u3aa0\0\u3ad8\0\250\0\u3b10\0\250\0\u3b48"+
+    "\0\250\0\u3b80\0\u3bb8\0\u3bf0\0\u3c28\0\250\0\u3c60\0\250"+
+    "\0\u3c98\0\u3cd0\0\u3d08\0\250\0\u3d40\0\u3d78\0\u3db0\0\u3de8"+
+    "\0\u3e20\0\250\0\u3e58\0\u3e90\0\250\0\u3ec8\0\u3f00\0\250"+
+    "\0\u3f38\0\u3f70\0\250\0\u3fa8\0\250\0\250\0\250\0\u3fe0"+
+    "\0\u4018\0\u4050\0\u4088\0\u40c0\0\u40f8\0\u4130\0\250\0\u4168"+
+    "\0\u41a0\0\250\0\250\0\250\0\u41d8\0\u4210\0\250\0\250"+
+    "\0\250\0\u4248\0\u4280\0\250\0\u42b8\0\250\0\u42f0\0\250"+
+    "\0\250\0\250\0\250\0\u4328\0\u4360\0\250\0\u4398\0\u43d0"+
+    "\0\u4408\0\u4440\0\u4478\0\u44b0\0\u44e8\0\u4520\0\u4558\0\u4590"+
+    "\0\u45c8\0\250\0\u4600\0\u4638\0\250\0\250\0\250\0\250"+
+    "\0\250\0\u4670\0\u46a8\0\250\0\250\0\u46e0\0\250\0\u4718"+
+    "\0\u4750\0\u4788\0\u47c0\0\250\0\250\0\u47f8\0\250\0\250"+
+    "\0\250\0\u4830\0\u4868\0\u48a0\0\u48d8\0\250\0\250\0\u4910"+
+    "\0\250\0\u4948\0\250\0\250";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[431];
+    int [] result = new int[436];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -195,119 +196,120 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
     "\1\4\1\5\1\6\1\4\1\7\1\10\1\4\1\11"+
     "\2\4\1\6\1\0\1\6\10\4\1\12\2\13\1\14"+
     "\1\15\2\4\1\16\4\4\1\17\10\4\1\20\14\4"+
-    "\1\6\5\21\1\22\62\21\1\4\1\5\1\6\1\4"+
-    "\1\23\1\24\1\25\1\26\1\27\1\30\1\6\1\0"+
-    "\1\6\1\31\2\4\1\32\1\33\1\34\3\4\2\35"+
-    "\2\4\1\36\1\37\1\40\2\4\2\41\1\42\1\4"+
-    "\1\43\3\4\1\44\2\4\1\45\1\46\1\47\1\50"+
-    "\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60"+
-    "\1\61\1\6\70\0\1\62\1\63\1\0\1\64\64\62"+
-    "\4\0\1\7\71\0\1\65\1\0\1\66\11\0\1\67"+
-    "\2\0\1\70\2\71\1\0\1\72\1\73\1\0\1\74"+
-    "\4\0\1\75\5\0\1\76\50\0\1\77\104\0\1\100"+
-    "\60\0\1\101\5\0\1\102\46\0\1\103\76\0\1\104"+
-    "\1\105\57\0\1\106\4\0\1\107\37\0\5\21\1\0"+
-    "\62\21\4\0\1\23\14\0\1\110\120\0\1\111\67\0"+
-    "\1\112\67\0\1\113\25\0\1\114\1\115\74\0\1\116"+
-    "\3\0\4\116\1\0\10\116\1\0\7\116\2\0\1\116"+
-    "\34\0\1\117\3\0\4\117\1\0\10\117\1\0\7\117"+
-    "\2\0\1\117\51\0\1\120\2\0\1\121\72\0\1\122"+
-    "\2\0\1\123\45\0\1\124\13\0\1\125\63\0\1\126"+
-    "\70\0\1\105\66\0\1\127\65\0\1\107\71\0\1\130"+
-    "\44\0\1\131\132\0\1\132\75\0\1\133\70\0\1\134"+
-    "\6\0\1\62\1\135\1\0\1\64\64\62\6\136\1\137"+
-    "\1\140\60\136\22\0\1\141\2\0\1\142\2\143\1\0"+
-    "\1\144\1\145\1\0\1\146\2\0\2\147\1\150\51\0"+
-    "\1\151\4\0\1\152\4\0\1\153\62\0\1\154\63\0"+
-    "\1\155\66\0\1\156\103\0\2\157\55\0\2\160\1\161"+
-    "\1\0\1\162\63\0\2\163\106\0\1\164\55\0\1\165"+
-    "\61\0\2\166\4\0\1\167\55\0\1\170\100\0\1\171"+
-    "\76\0\1\172\62\0\1\173\76\0\1\174\61\0\1\175"+
-    "\35\0\1\176\63\0\2\114\1\177\7\114\1\200\2\0"+
-    "\53\114\11\115\1\201\56\115\4\0\1\116\11\0\2\116"+
-    "\2\0\4\116\1\0\10\116\1\0\7\116\2\0\1\116"+
-    "\22\0\1\117\11\0\2\117\2\0\4\117\1\0\10\117"+
-    "\1\0\7\117\2\0\1\117\50\0\1\202\63\0\2\203"+
-    "\77\0\2\204\75\0\1\205\60\0\2\206\54\0\1\207"+
-    "\76\0\1\210\67\0\1\211\33\0\6\136\1\137\61\136"+
-    "\6\65\1\212\1\213\60\65\7\0\1\65\103\0\1\214"+
-    "\4\0\1\215\4\0\1\216\62\0\1\217\63\0\1\220"+
-    "\66\0\1\221\103\0\2\222\55\0\2\223\1\224\1\0"+
-    "\1\225\65\0\1\226\65\0\2\227\64\0\1\230\11\0"+
-    "\1\231\62\0\1\232\70\0\1\233\70\0\1\234\64\0"+
-    "\1\235\73\0\1\236\60\0\1\237\76\0\1\240\64\0"+
-    "\1\241\100\0\1\242\63\0\1\243\70\0\2\244\75\0"+
-    "\1\245\65\0\1\246\46\0\1\247\112\0\1\250\66\0"+
-    "\1\251\56\0\1\252\65\0\1\253\102\0\1\254\61\0"+
-    "\2\255\31\0\1\177\65\0\10\256\1\177\1\257\56\256"+
-    "\30\0\1\260\61\0\1\261\77\0\1\262\60\0\1\263"+
-    "\76\0\1\264\67\0\1\265\57\0\1\266\2\0\1\267"+
-    "\2\0\1\270\1\271\2\0\1\272\55\0\1\273\2\0"+
-    "\1\274\2\0\1\275\1\276\2\0\1\277\33\0\6\136"+
-    "\1\137\1\300\60\136\24\0\1\301\11\0\1\302\62\0"+
-    "\1\303\70\0\1\304\70\0\1\305\64\0\1\306\73\0"+
-    "\1\307\60\0\1\310\76\0\1\311\64\0\1\312\100\0"+
-    "\1\313\63\0\1\314\67\0\1\315\56\0\1\316\77\0"+
-    "\1\317\64\0\1\320\70\0\1\321\67\0\1\322\77\0"+
-    "\1\323\47\0\1\324\74\0\1\325\74\0\1\326\70\0"+
-    "\1\327\65\0\1\330\63\0\1\331\71\0\1\332\60\0"+
-    "\1\333\76\0\1\334\60\0\1\335\67\0\1\336\76\0"+
-    "\1\337\35\0\10\115\1\340\1\201\66\115\1\341\1\201"+
-    "\56\115\33\0\1\342\104\0\2\343\51\0\1\344\70\0"+
-    "\1\345\56\0\1\346\74\0\1\347\75\0\1\350\5\0"+
-    "\1\351\46\0\1\352\76\0\1\353\60\0\1\354\74\0"+
-    "\1\355\75\0\1\356\5\0\1\357\46\0\1\360\76\0"+
-    "\1\361\62\0\1\362\77\0\1\363\64\0\1\364\70\0"+
-    "\1\365\67\0\1\366\77\0\1\367\47\0\1\370\74\0"+
-    "\1\371\74\0\1\372\70\0\1\373\65\0\1\374\67\0"+
-    "\1\375\63\0\1\376\65\0\2\377\64\0\1\u0100\65\0"+
-    "\1\u0101\72\0\1\u0102\72\0\1\u0103\71\0\1\u0104\101\0"+
-    "\1\u0105\45\0\1\u0106\103\0\1\u0107\61\0\1\u0108\62\0"+
-    "\1\u0109\53\0\1\u010a\110\0\1\u010b\47\0\1\256\104\0"+
-    "\1\u010c\2\u010d\1\0\1\u010e\2\0\1\u010f\64\0\1\u0110"+
-    "\72\0\1\u0111\61\0\2\u0112\104\0\1\u0113\57\0\1\u0114"+
-    "\61\0\2\u0115\4\0\1\u0116\55\0\1\u0117\100\0\1\u0118"+
-    "\76\0\1\u0119\71\0\1\u011a\57\0\1\u011b\61\0\2\u011c"+
-    "\4\0\1\u011d\55\0\1\u011e\100\0\1\u011f\76\0\1\u0120"+
-    "\53\0\2\u0121\64\0\1\u0122\65\0\1\u0123\72\0\1\u0124"+
-    "\72\0\1\u0125\71\0\1\u0126\101\0\1\u0127\45\0\1\u0128"+
-    "\103\0\1\u0129\61\0\1\u012a\62\0\1\u012b\67\0\1\u012c"+
-    "\53\0\1\u012d\67\0\1\u012e\124\0\1\u012f\55\0\1\u0130"+
-    "\60\0\1\u0131\105\0\1\u0132\72\0\1\u0133\51\0\2\u0134"+
-    "\63\0\1\u0135\74\0\1\u0136\1\u0137\60\0\1\u0138\75\0"+
-    "\1\u0139\63\0\1\u013a\66\0\1\u013b\74\0\1\u013c\1\0"+
-    "\1\u013d\60\0\1\u013e\74\0\1\u013f\72\0\1\u0140\70\0"+
-    "\1\u0141\101\0\1\u0142\65\0\1\u0143\46\0\1\u0144\112\0"+
-    "\1\u0145\66\0\1\u0146\56\0\1\u0147\67\0\1\u0148\101\0"+
-    "\1\u0149\65\0\1\u014a\46\0\1\u014b\112\0\1\u014c\66\0"+
-    "\1\u014d\56\0\1\u014e\42\0\1\u014f\124\0\1\u0150\55\0"+
-    "\1\u0151\60\0\1\u0152\105\0\1\u0153\72\0\1\u0154\32\0"+
-    "\1\u0155\106\0\2\u0156\63\0\1\u0157\53\0\1\u0158\110\0"+
-    "\1\u0159\1\u015a\45\0\1\u015b\110\0\1\u015c\72\0\1\u015d"+
-    "\57\0\1\u015e\67\0\1\u015f\53\0\1\u0160\67\0\1\u0161"+
-    "\67\0\1\u0162\106\0\2\u0163\73\0\1\u0164\64\0\1\u0165"+
-    "\73\0\1\u0166\64\0\1\u0167\100\0\1\u0168\61\0\1\u0169"+
-    "\66\0\1\u016a\66\0\1\u016b\67\0\1\u016c\60\0\1\u016d"+
-    "\76\0\1\u016e\60\0\1\u016f\76\0\1\u0170\67\0\1\u0171"+
-    "\60\0\1\u0172\76\0\1\u0173\60\0\1\u0174\74\0\1\u0175"+
-    "\72\0\1\u0176\43\0\1\u0177\103\0\1\u0178\53\0\1\u0179"+
-    "\103\0\1\u017a\53\0\1\u017b\67\0\1\u017c\67\0\1\u017d"+
-    "\67\0\1\u017e\12\0\1\u017f\75\0\1\u0180\46\0\1\u0181"+
-    "\103\0\1\u0182\77\0\1\u0183\77\0\1\u0184\47\0\1\u0185"+
-    "\102\0\1\u0186\65\0\1\u0187\56\0\1\u0188\110\0\1\u0189"+
-    "\53\0\1\u018a\103\0\1\u018b\53\0\1\u018c\46\0\1\u018d"+
-    "\12\0\1\u018e\75\0\1\u018f\46\0\1\u0190\67\0\1\u0191"+
-    "\67\0\1\u0192\67\0\1\u0193\124\0\1\u0194\53\0\1\u0195"+
-    "\71\0\1\u0196\101\0\1\u0197\53\0\1\u0198\62\0\1\u0199"+
-    "\110\0\1\u019a\51\0\2\u019b\62\0\1\u019c\73\0\2\u019d"+
-    "\62\0\1\u019e\54\0\1\u019f\67\0\1\u01a0\121\0\1\u01a1"+
-    "\72\0\1\u01a2\53\0\1\u01a3\1\u01a4\103\0\1\u01a5\50\0"+
-    "\2\u01a6\105\0\1\u01a7\50\0\2\u01a8\63\0\1\u01a9\67\0"+
-    "\1\u01aa\67\0\1\u01ab\67\0\1\u01ac\67\0\1\u01ad\110\0"+
-    "\1\u01ae\67\0\1\u01af\23\0";
+    "\1\6\5\21\1\22\62\21\1\4\1\23\1\6\1\4"+
+    "\1\24\1\25\1\26\1\27\1\30\1\31\1\6\1\0"+
+    "\1\6\1\32\2\4\1\33\1\34\1\35\3\4\2\36"+
+    "\2\4\1\37\1\40\1\41\2\4\2\42\1\43\1\4"+
+    "\1\44\3\4\1\45\2\4\1\46\1\47\1\50\1\51"+
+    "\1\52\1\53\1\54\1\55\1\56\1\57\1\60\1\61"+
+    "\1\62\1\6\70\0\1\63\1\64\1\0\1\65\64\63"+
+    "\4\0\1\7\71\0\1\66\1\0\1\67\11\0\1\70"+
+    "\2\0\1\71\2\72\1\0\1\73\1\74\1\0\1\75"+
+    "\4\0\1\76\5\0\1\77\50\0\1\100\104\0\1\101"+
+    "\60\0\1\102\5\0\1\103\46\0\1\104\76\0\1\105"+
+    "\1\106\57\0\1\107\4\0\1\110\37\0\5\21\1\0"+
+    "\62\21\1\111\1\112\1\0\1\113\64\111\4\0\1\24"+
+    "\14\0\1\114\120\0\1\115\67\0\1\116\67\0\1\117"+
+    "\25\0\1\120\1\121\74\0\1\122\3\0\4\122\1\0"+
+    "\10\122\1\0\7\122\2\0\1\122\34\0\1\123\3\0"+
+    "\4\123\1\0\10\123\1\0\7\123\2\0\1\123\51\0"+
+    "\1\124\2\0\1\125\72\0\1\126\2\0\1\127\45\0"+
+    "\1\130\13\0\1\131\63\0\1\132\70\0\1\106\66\0"+
+    "\1\133\65\0\1\110\71\0\1\134\44\0\1\135\132\0"+
+    "\1\136\75\0\1\137\70\0\1\140\6\0\1\63\1\141"+
+    "\1\0\1\65\64\63\6\142\1\143\1\144\60\142\22\0"+
+    "\1\145\2\0\1\146\2\147\1\0\1\150\1\151\1\0"+
+    "\1\152\2\0\2\153\1\154\51\0\1\155\4\0\1\156"+
+    "\4\0\1\157\62\0\1\160\63\0\1\161\66\0\1\162"+
+    "\103\0\2\163\55\0\2\164\1\165\1\0\1\166\63\0"+
+    "\2\167\106\0\1\170\55\0\1\171\61\0\2\172\4\0"+
+    "\1\173\55\0\1\174\100\0\1\175\76\0\1\176\62\0"+
+    "\1\177\76\0\1\200\61\0\1\201\31\0\1\111\1\202"+
+    "\1\0\1\113\64\111\4\0\1\203\63\0\2\120\1\204"+
+    "\7\120\1\205\2\0\53\120\11\121\1\206\56\121\4\0"+
+    "\1\122\11\0\2\122\2\0\4\122\1\0\10\122\1\0"+
+    "\7\122\2\0\1\122\22\0\1\123\11\0\2\123\2\0"+
+    "\4\123\1\0\10\123\1\0\7\123\2\0\1\123\50\0"+
+    "\1\207\63\0\2\210\77\0\2\211\75\0\1\212\60\0"+
+    "\2\213\54\0\1\214\76\0\1\215\67\0\1\216\33\0"+
+    "\6\142\1\143\61\142\6\66\1\217\1\220\60\66\7\0"+
+    "\1\66\103\0\1\221\4\0\1\222\4\0\1\223\62\0"+
+    "\1\224\63\0\1\225\66\0\1\226\103\0\2\227\55\0"+
+    "\2\230\1\231\1\0\1\232\65\0\1\233\65\0\2\234"+
+    "\64\0\1\235\11\0\1\236\62\0\1\237\70\0\1\240"+
+    "\70\0\1\241\64\0\1\242\73\0\1\243\60\0\1\244"+
+    "\76\0\1\245\64\0\1\246\100\0\1\247\63\0\1\250"+
+    "\70\0\2\251\75\0\1\252\65\0\1\253\46\0\1\254"+
+    "\112\0\1\255\66\0\1\256\56\0\1\257\65\0\1\260"+
+    "\102\0\1\261\61\0\2\262\31\0\1\204\65\0\10\263"+
+    "\1\204\1\264\56\263\30\0\1\265\61\0\1\266\77\0"+
+    "\1\267\60\0\1\270\76\0\1\271\67\0\1\272\57\0"+
+    "\1\273\2\0\1\274\2\0\1\275\1\276\2\0\1\277"+
+    "\55\0\1\300\2\0\1\301\2\0\1\302\1\303\2\0"+
+    "\1\304\33\0\6\142\1\143\1\305\60\142\24\0\1\306"+
+    "\11\0\1\307\62\0\1\310\70\0\1\311\70\0\1\312"+
+    "\64\0\1\313\73\0\1\314\60\0\1\315\76\0\1\316"+
+    "\64\0\1\317\100\0\1\320\63\0\1\321\67\0\1\322"+
+    "\56\0\1\323\77\0\1\324\64\0\1\325\70\0\1\326"+
+    "\67\0\1\327\77\0\1\330\47\0\1\331\74\0\1\332"+
+    "\74\0\1\333\70\0\1\334\65\0\1\335\63\0\1\336"+
+    "\71\0\1\337\60\0\1\340\76\0\1\341\60\0\1\342"+
+    "\67\0\1\343\76\0\1\344\35\0\10\121\1\345\1\206"+
+    "\66\121\1\346\1\206\56\121\33\0\1\347\104\0\2\350"+
+    "\51\0\1\351\70\0\1\352\56\0\1\353\74\0\1\354"+
+    "\75\0\1\355\5\0\1\356\46\0\1\357\76\0\1\360"+
+    "\60\0\1\361\74\0\1\362\75\0\1\363\5\0\1\364"+
+    "\46\0\1\365\76\0\1\366\62\0\1\367\77\0\1\370"+
+    "\64\0\1\371\70\0\1\372\67\0\1\373\77\0\1\374"+
+    "\47\0\1\375\74\0\1\376\74\0\1\377\70\0\1\u0100"+
+    "\65\0\1\u0101\67\0\1\u0102\63\0\1\u0103\65\0\2\u0104"+
+    "\64\0\1\u0105\65\0\1\u0106\72\0\1\u0107\72\0\1\u0108"+
+    "\71\0\1\u0109\101\0\1\u010a\45\0\1\u010b\103\0\1\u010c"+
+    "\61\0\1\u010d\62\0\1\u010e\53\0\1\u010f\110\0\1\u0110"+
+    "\47\0\1\263\104\0\1\u0111\2\u0112\1\0\1\u0113\2\0"+
+    "\1\u0114\64\0\1\u0115\72\0\1\u0116\61\0\2\u0117\104\0"+
+    "\1\u0118\57\0\1\u0119\61\0\2\u011a\4\0\1\u011b\55\0"+
+    "\1\u011c\100\0\1\u011d\76\0\1\u011e\71\0\1\u011f\57\0"+
+    "\1\u0120\61\0\2\u0121\4\0\1\u0122\55\0\1\u0123\100\0"+
+    "\1\u0124\76\0\1\u0125\53\0\2\u0126\64\0\1\u0127\65\0"+
+    "\1\u0128\72\0\1\u0129\72\0\1\u012a\71\0\1\u012b\101\0"+
+    "\1\u012c\45\0\1\u012d\103\0\1\u012e\61\0\1\u012f\62\0"+
+    "\1\u0130\67\0\1\u0131\53\0\1\u0132\67\0\1\u0133\124\0"+
+    "\1\u0134\55\0\1\u0135\60\0\1\u0136\105\0\1\u0137\72\0"+
+    "\1\u0138\51\0\2\u0139\63\0\1\u013a\74\0\1\u013b\1\u013c"+
+    "\60\0\1\u013d\75\0\1\u013e\63\0\1\u013f\66\0\1\u0140"+
+    "\74\0\1\u0141\1\0\1\u0142\60\0\1\u0143\74\0\1\u0144"+
+    "\72\0\1\u0145\70\0\1\u0146\101\0\1\u0147\65\0\1\u0148"+
+    "\46\0\1\u0149\112\0\1\u014a\66\0\1\u014b\56\0\1\u014c"+
+    "\67\0\1\u014d\101\0\1\u014e\65\0\1\u014f\46\0\1\u0150"+
+    "\112\0\1\u0151\66\0\1\u0152\56\0\1\u0153\42\0\1\u0154"+
+    "\124\0\1\u0155\55\0\1\u0156\60\0\1\u0157\105\0\1\u0158"+
+    "\72\0\1\u0159\32\0\1\u015a\106\0\2\u015b\63\0\1\u015c"+
+    "\53\0\1\u015d\110\0\1\u015e\1\u015f\45\0\1\u0160\110\0"+
+    "\1\u0161\72\0\1\u0162\57\0\1\u0163\67\0\1\u0164\53\0"+
+    "\1\u0165\67\0\1\u0166\67\0\1\u0167\106\0\2\u0168\73\0"+
+    "\1\u0169\64\0\1\u016a\73\0\1\u016b\64\0\1\u016c\100\0"+
+    "\1\u016d\61\0\1\u016e\66\0\1\u016f\66\0\1\u0170\67\0"+
+    "\1\u0171\60\0\1\u0172\76\0\1\u0173\60\0\1\u0174\76\0"+
+    "\1\u0175\67\0\1\u0176\60\0\1\u0177\76\0\1\u0178\60\0"+
+    "\1\u0179\74\0\1\u017a\72\0\1\u017b\43\0\1\u017c\103\0"+
+    "\1\u017d\53\0\1\u017e\103\0\1\u017f\53\0\1\u0180\67\0"+
+    "\1\u0181\67\0\1\u0182\67\0\1\u0183\12\0\1\u0184\75\0"+
+    "\1\u0185\46\0\1\u0186\103\0\1\u0187\77\0\1\u0188\77\0"+
+    "\1\u0189\47\0\1\u018a\102\0\1\u018b\65\0\1\u018c\56\0"+
+    "\1\u018d\110\0\1\u018e\53\0\1\u018f\103\0\1\u0190\53\0"+
+    "\1\u0191\46\0\1\u0192\12\0\1\u0193\75\0\1\u0194\46\0"+
+    "\1\u0195\67\0\1\u0196\67\0\1\u0197\67\0\1\u0198\124\0"+
+    "\1\u0199\53\0\1\u019a\71\0\1\u019b\101\0\1\u019c\53\0"+
+    "\1\u019d\62\0\1\u019e\110\0\1\u019f\51\0\2\u01a0\62\0"+
+    "\1\u01a1\73\0\2\u01a2\62\0\1\u01a3\54\0\1\u01a4\67\0"+
+    "\1\u01a5\121\0\1\u01a6\72\0\1\u01a7\53\0\1\u01a8\1\u01a9"+
+    "\103\0\1\u01aa\50\0\2\u01ab\105\0\1\u01ac\50\0\2\u01ad"+
+    "\63\0\1\u01ae\67\0\1\u01af\67\0\1\u01b0\67\0\1\u01b1"+
+    "\67\0\1\u01b2\110\0\1\u01b3\67\0\1\u01b4\23\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[18704];
+    int [] result = new int[18816];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -346,23 +348,23 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\3\0\1\11\1\1\1\11\2\1\1\11\6\1\1\11"+
-    "\1\1\1\11\5\1\1\11\2\1\1\11\12\1\5\11"+
-    "\2\1\5\11\1\0\1\11\14\0\1\11\10\0\3\11"+
-    "\2\0\2\1\2\0\1\11\6\0\4\11\1\1\40\0"+
-    "\1\1\1\11\1\1\12\0\1\11\30\0\2\11\1\0"+
-    "\1\11\3\0\1\11\7\0\2\11\13\0\1\1\32\0"+
-    "\5\11\1\0\1\1\43\0\1\11\2\0\1\11\1\0"+
-    "\1\11\42\0\2\11\2\0\1\11\1\0\1\11\14\0"+
-    "\1\11\1\0\1\11\1\0\1\11\4\0\1\11\1\0"+
-    "\1\11\3\0\1\11\5\0\1\11\2\0\1\11\2\0"+
-    "\1\11\2\0\1\11\1\0\3\11\7\0\1\11\2\0"+
-    "\3\11\2\0\3\11\2\0\1\11\1\0\1\11\1\0"+
-    "\4\11\2\0\1\11\13\0\1\11\2\0\5\11\2\0"+
-    "\2\11\1\0\1\11\4\0\2\11\1\0\3\11\4\0"+
-    "\2\11\1\0\1\11\1\0\2\11";
+    "\1\1\1\11\6\1\1\11\2\1\1\11\12\1\5\11"+
+    "\2\1\5\11\1\0\1\11\14\0\1\11\10\0\1\11"+
+    "\2\0\3\11\2\0\2\1\2\0\1\11\6\0\4\11"+
+    "\1\1\40\0\2\1\1\11\1\1\12\0\1\11\30\0"+
+    "\2\11\1\0\1\11\3\0\1\11\7\0\2\11\13\0"+
+    "\1\1\32\0\5\11\1\0\1\1\43\0\1\11\2\0"+
+    "\1\11\1\0\1\11\42\0\2\11\2\0\1\11\1\0"+
+    "\1\11\14\0\1\11\1\0\1\11\1\0\1\11\4\0"+
+    "\1\11\1\0\1\11\3\0\1\11\5\0\1\11\2\0"+
+    "\1\11\2\0\1\11\2\0\1\11\1\0\3\11\7\0"+
+    "\1\11\2\0\3\11\2\0\3\11\2\0\1\11\1\0"+
+    "\1\11\1\0\4\11\2\0\1\11\13\0\1\11\2\0"+
+    "\5\11\2\0\2\11\1\0\1\11\4\0\2\11\1\0"+
+    "\3\11\4\0\2\11\1\0\1\11\1\0\2\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[431];
+    int [] result = new int[436];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -445,8 +447,13 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
         return err;
     }
 */
+
     StringBuffer string = new StringBuffer();
     boolean estado=false;
+    Tokens ts=new Tokens();
+    public Tokens getTokens(){
+        return ts;
+    }
 
 
   /**
@@ -821,41 +828,43 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
                                 //err.addE("LEXICO", yytext(), yyline+1, yycolumn, "Simbolo fuera de este lenguaje");
             } 
             // fall through
-          case 103: break;
+          case 104: break;
           case 2: 
             { /* Espacios en blanco */
             } 
             // fall through
-          case 104: break;
+          case 105: break;
           case 3: 
-            { System.out.println("num    |"+yytext());return new Symbol(Simbolos.num,yycolumn, yyline, yytext());
+            { ts.setToken("num",yytext(),yyline,yycolumn);System.out.println("num    |"+yytext());return new Symbol(Simbolos.num,yycolumn, yyline, yytext());
             } 
             // fall through
-          case 105: break;
+          case 106: break;
           case 4: 
             { System.out.println("cie    |"+yytext());
                                     if(estado) yybegin(TEXTO);
                                     estado=false;
+                                    ts.setToken("cie",yytext(),yyline,yycolumn);
                                     return new Symbol(Simbolos.cie,yycolumn, yyline, yytext());
             } 
             // fall through
-          case 106: break;
+          case 107: break;
           case 5: 
-            { System.out.println("igu    |"+yytext());return new Symbol(Simbolos.igu,yycolumn, yyline, yytext());
+            { ts.setToken("igu",yytext(),yyline,yycolumn);System.out.println("igu    |"+yytext());return new Symbol(Simbolos.igu,yycolumn, yyline, yytext());
             } 
             // fall through
-          case 107: break;
+          case 108: break;
           case 6: 
             { string.setLength(0); string.append(yytext());
             } 
             // fall through
-          case 108: break;
+          case 109: break;
           case 7: 
             { if(!(string.length()==0||string.toString().matches("[ \t\r\n\f]+"))){
                                     String e=string.toString().replace("\t","").replace("\r","").replace("\n","");
                                     System.out.println("texto  |"+e); 
                                     yypushback(1); 
                                     yybegin(YYINITIAL);
+                                    ts.setToken("texto",e,yyline,yycolumn);
                                     return new Symbol(Simbolos.texto, yycolumn, yyline, e); 
                                 }
                                 else {  
@@ -864,482 +873,487 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
                                 }
             } 
             // fall through
-          case 109: break;
-          case 8: 
-            { System.out.println("les    |"+yytext());return new Symbol(Simbolos.les,yycolumn, yyline, yytext());
-            } 
-            // fall through
           case 110: break;
-          case 9: 
-            { System.out.println("not    |"+yytext());return new Symbol(Simbolos.not,yycolumn, yyline, yytext());
+          case 8: 
+            { ts.setToken("les",yytext(),yyline,yycolumn);System.out.println("les    |"+yytext());return new Symbol(Simbolos.les,yycolumn, yyline, yytext());
             } 
             // fall through
           case 111: break;
-          case 10: 
-            { System.out.println("gre    |"+yytext());return new Symbol(Simbolos.gre,yycolumn, yyline, yytext());
+          case 9: 
+            { ts.setToken("not",yytext(),yyline,yycolumn);System.out.println("not    |"+yytext());return new Symbol(Simbolos.not,yycolumn, yyline, yytext());
             } 
             // fall through
           case 112: break;
-          case 11: 
-            { System.out.println("div    |"+yytext());return new Symbol(Simbolos.div,yycolumn, yyline, yytext());
+          case 10: 
+            { ts.setToken("gre",yytext(),yyline,yycolumn);System.out.println("gre    |"+yytext());return new Symbol(Simbolos.gre,yycolumn, yyline, yytext());
             } 
             // fall through
           case 113: break;
-          case 12: 
-            { System.out.println("por    |"+yytext());return new Symbol(Simbolos.por,yycolumn, yyline, yytext());
+          case 11: 
+            { ts.setToken("div",yytext(),yyline,yycolumn);System.out.println("div    |"+yytext());return new Symbol(Simbolos.div,yycolumn, yyline, yytext());
             } 
             // fall through
           case 114: break;
-          case 13: 
-            { System.out.println("pun    |"+yytext());return new Symbol(Simbolos.pun,yycolumn, yyline, yytext());
+          case 12: 
+            { ts.setToken("por",yytext(),yyline,yycolumn);System.out.println("por    |"+yytext());return new Symbol(Simbolos.por,yycolumn, yyline, yytext());
             } 
             // fall through
           case 115: break;
-          case 14: 
-            { System.out.println("pyc    |"+yytext());return new Symbol(Simbolos.pyc,yycolumn, yyline, yytext());
+          case 13: 
+            { ts.setToken("pun",yytext(),yyline,yycolumn);System.out.println("pun    |"+yytext());return new Symbol(Simbolos.pun,yycolumn, yyline, yytext());
             } 
             // fall through
           case 116: break;
-          case 15: 
-            { System.out.println("mas    |"+yytext());return new Symbol(Simbolos.mas,yycolumn, yyline, yytext());
+          case 14: 
+            { ts.setToken("pyc",yytext(),yyline,yycolumn);System.out.println("pyc    |"+yytext());return new Symbol(Simbolos.pyc,yycolumn, yyline, yytext());
             } 
             // fall through
           case 117: break;
-          case 16: 
-            { System.out.println("men    |"+yytext());return new Symbol(Simbolos.men,yycolumn, yyline, yytext());
+          case 15: 
+            { ts.setToken("mas",yytext(),yyline,yycolumn);System.out.println("mas    |"+yytext());return new Symbol(Simbolos.mas,yycolumn, yyline, yytext());
             } 
             // fall through
           case 118: break;
-          case 17: 
-            { System.out.println("par    |"+yytext());return new Symbol(Simbolos.parA,yycolumn, yyline, yytext());
+          case 16: 
+            { ts.setToken("men",yytext(),yyline,yycolumn);System.out.println("men    |"+yytext());return new Symbol(Simbolos.men,yycolumn, yyline, yytext());
             } 
             // fall through
           case 119: break;
-          case 18: 
-            { System.out.println("par    |"+yytext());return new Symbol(Simbolos.parC,yycolumn, yyline, yytext());
+          case 17: 
+            { ts.setToken("par",yytext(),yyline,yycolumn);System.out.println("par    |"+yytext());return new Symbol(Simbolos.parA,yycolumn, yyline, yytext());
             } 
             // fall through
           case 120: break;
-          case 19: 
-            { System.out.println("llavA  |"+yytext());return new Symbol(Simbolos.llavA,yycolumn, yyline, yytext());
+          case 18: 
+            { ts.setToken("par",yytext(),yyline,yycolumn);System.out.println("par    |"+yytext());return new Symbol(Simbolos.parC,yycolumn, yyline, yytext());
             } 
             // fall through
           case 121: break;
-          case 20: 
-            { System.out.println("llavC  |"+yytext());return new Symbol(Simbolos.llavC,yycolumn, yyline, yytext());
+          case 19: 
+            { ts.setToken("llavA",yytext(),yyline,yycolumn);System.out.println("llavA  |"+yytext());return new Symbol(Simbolos.llavA,yycolumn, yyline, yytext());
             } 
             // fall through
           case 122: break;
-          case 21: 
-            { System.out.println("coma   |"+yytext());return new Symbol(Simbolos.coma,yycolumn, yyline, yytext());
+          case 20: 
+            { ts.setToken("llavC",yytext(),yyline,yycolumn);System.out.println("llavC  |"+yytext());return new Symbol(Simbolos.llavC,yycolumn, yyline, yytext());
             } 
             // fall through
           case 123: break;
-          case 22: 
-            { System.out.println("corA   |"+yytext());return new Symbol(Simbolos.corA,yycolumn, yyline, yytext());
+          case 21: 
+            { ts.setToken("coma",yytext(),yyline,yycolumn);System.out.println("coma   |"+yytext());return new Symbol(Simbolos.coma,yycolumn, yyline, yytext());
             } 
             // fall through
           case 124: break;
-          case 23: 
-            { System.out.println("corC   |"+yytext());return new Symbol(Simbolos.corC,yycolumn, yyline, yytext());
+          case 22: 
+            { ts.setToken("corA",yytext(),yyline,yycolumn);System.out.println("corA   |"+yytext());return new Symbol(Simbolos.corA,yycolumn, yyline, yytext());
             } 
             // fall through
           case 125: break;
-          case 24: 
-            { System.out.println("cad    |"+yytext());return new Symbol(Simbolos.cad,yycolumn, yyline, (yytext()).substring(1,yytext().length()-1));
+          case 23: 
+            { ts.setToken("corC",yytext(),yyline,yycolumn);System.out.println("corC   |"+yytext());return new Symbol(Simbolos.corC,yycolumn, yyline, yytext());
             } 
             // fall through
           case 126: break;
-          case 25: 
-            { System.out.println("ide");  return new Symbol(Simbolos.ide,yycolumn, yyline, yytext());
+          case 24: 
+            { ts.setToken("cad",yytext(),yyline,yycolumn);System.out.println("cad    |"+yytext());return new Symbol(Simbolos.cad,yycolumn, yyline, (yytext()).substring(1,yytext().length()-1));
             } 
             // fall through
           case 127: break;
-          case 26: 
-            { System.out.println("lesigu |"+yytext());return new Symbol(Simbolos.lesigu,yycolumn, yyline, yytext());
+          case 25: 
+            { ts.setToken("ide",yytext(),yyline,yycolumn);System.out.println("ide");  return new Symbol(Simbolos.ide,yycolumn, yyline, yytext());
             } 
             // fall through
           case 128: break;
-          case 27: 
-            { System.out.println("diff   |"+yytext());return new Symbol(Simbolos.diff,yycolumn, yyline, yytext());
+          case 26: 
+            { ts.setToken("cad",(yytext()).substring(1,yytext().length()-1),yyline,yycolumn);System.out.println("cad    |"+yytext());return new Symbol(Simbolos.cad,yycolumn, yyline, (yytext()).substring(1,yytext().length()-1));
             } 
             // fall through
           case 129: break;
-          case 28: 
-            { System.out.println("greigu |"+yytext());return new Symbol(Simbolos.greigu,yycolumn, yyline, yytext());
+          case 27: 
+            { ts.setToken("lesigu",yytext(),yyline,yycolumn);System.out.println("lesigu |"+yytext());return new Symbol(Simbolos.lesigu,yycolumn, yyline, yytext());
             } 
             // fall through
           case 130: break;
-          case 29: 
-            { System.out.println("idvar  |"+yytext());return new Symbol(Simbolos.idvar,yycolumn, yyline, yytext());
+          case 28: 
+            { ts.setToken("diff",yytext(),yyline,yycolumn);System.out.println("diff   |"+yytext());return new Symbol(Simbolos.diff,yycolumn, yyline, yytext());
             } 
             // fall through
           case 131: break;
-          case 30: 
-            { System.out.println("idobj  |"+yytext());return new Symbol(Simbolos.idobj,yycolumn, yyline, yytext());
+          case 29: 
+            { ts.setToken("greigu",yytext(),yyline,yycolumn);System.out.println("greigu |"+yytext());return new Symbol(Simbolos.greigu,yycolumn, yyline, yytext());
             } 
             // fall through
           case 132: break;
-          case 31: 
-            { System.out.println("if");return new Symbol(Simbolos.ife,yycolumn, yyline, yytext());
+          case 30: 
+            { ts.setToken("idvar",yytext(),yyline,yycolumn);System.out.println("idvar  |"+yytext());return new Symbol(Simbolos.idvar,yycolumn, yyline, yytext());
             } 
             // fall through
           case 133: break;
-          case 32: 
-            { System.out.println("hs_c");yybegin(TEXTO);return new Symbol(Simbolos.hs_c,yycolumn, yyline, yytext());
+          case 31: 
+            { ts.setToken("idobj",yytext(),yyline,yycolumn);System.out.println("idobj  |"+yytext());return new Symbol(Simbolos.idobj,yycolumn, yyline, yytext());
             } 
             // fall through
           case 134: break;
-          case 33: 
-            { System.out.println("igua   |"+yytext());return new Symbol(Simbolos.igua,yycolumn, yyline, yytext());
+          case 32: 
+            { ts.setToken("if",yytext(),yyline,yycolumn);System.out.println("if");return new Symbol(Simbolos.ife,yycolumn, yyline, yytext());
             } 
             // fall through
           case 135: break;
-          case 34: 
-            { System.out.println("and    |"+yytext());return new Symbol(Simbolos.and,yycolumn, yyline, yytext());
+          case 33: 
+            { ts.setToken("hs_c",yytext(),yyline,yycolumn);System.out.println("hs_c");yybegin(TEXTO);return new Symbol(Simbolos.hs_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 136: break;
-          case 35: 
-            { System.out.println("or     |"+yytext());return new Symbol(Simbolos.or,yycolumn, yyline, yytext());
+          case 34: 
+            { ts.setToken("igua",yytext(),yyline,yycolumn);System.out.println("igua   |"+yytext());return new Symbol(Simbolos.igua,yycolumn, yyline, yytext());
             } 
             // fall through
           case 137: break;
-          case 36: 
-            { System.out.println("dec    |"+yytext());return new Symbol(Simbolos.dec,yycolumn, yyline, yytext());
+          case 35: 
+            { ts.setToken("and",yytext(),yyline,yycolumn);System.out.println("and    |"+yytext());return new Symbol(Simbolos.and,yycolumn, yyline, yytext());
             } 
             // fall through
           case 138: break;
-          case 37: 
-            { 
+          case 36: 
+            { ts.setToken("or",yytext(),yyline,yycolumn);System.out.println("or     |"+yytext());return new Symbol(Simbolos.or,yycolumn, yyline, yytext());
             } 
             // fall through
           case 139: break;
-          case 38: 
-            { yybegin(TEXTO);
+          case 37: 
+            { ts.setToken("dec",yytext(),yyline,yycolumn);System.out.println("dec    |"+yytext());return new Symbol(Simbolos.dec,yycolumn, yyline, yytext());
             } 
             // fall through
           case 140: break;
-          case 39: 
-            { System.out.println("hs_a"); yybegin(HS);return new Symbol(Simbolos.hs_a,yycolumn, yyline, yytext());
+          case 38: 
+            { 
             } 
             // fall through
           case 141: break;
-          case 40: 
-            { System.out.println("path"); return new Symbol(Simbolos.path,yycolumn, yyline, yytext());
+          case 39: 
+            { yybegin(TEXTO);
             } 
             // fall through
           case 142: break;
-          case 41: 
-            { System.out.println("alto"); return new Symbol(Simbolos.alto,yycolumn, yyline, yytext());
+          case 40: 
+            { ts.setToken("hs_a",yytext(),yyline,yycolumn);System.out.println("hs_a"); yybegin(HS);return new Symbol(Simbolos.hs_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 143: break;
-          case 42: 
-            { System.out.println("tru");  return new Symbol(Simbolos.tru,yycolumn, yyline, yytext());
+          case 41: 
+            { ts.setToken("path",yytext(),yyline,yycolumn);System.out.println("path"); return new Symbol(Simbolos.path,yycolumn, yyline, yytext());
             } 
             // fall through
           case 144: break;
-          case 43: 
-            { System.out.println("echo"); return new Symbol(Simbolos.echo,yycolumn, yyline, yytext());
+          case 42: 
+            { ts.setToken("alto",yytext(),yyline,yycolumn);System.out.println("alto"); return new Symbol(Simbolos.alto,yycolumn, yyline, yytext());
             } 
             // fall through
           case 145: break;
-          case 44: 
-            { System.out.println("else");return new Symbol(Simbolos.elsee,yycolumn, yyline, yytext());
+          case 43: 
+            { ts.setToken("tru",yytext(),yyline,yycolumn);System.out.println("tru");  return new Symbol(Simbolos.tru,yycolumn, yyline, yytext());
             } 
             // fall through
           case 146: break;
-          case 45: 
-            { System.out.println("anch"); return new Symbol(Simbolos.anch,yycolumn, yyline, yytext());
+          case 44: 
+            { ts.setToken("echo",yytext(),yyline,yycolumn);System.out.println("echo"); return new Symbol(Simbolos.echo,yycolumn, yyline, yytext());
             } 
             // fall through
           case 147: break;
-          case 46: 
-            { System.out.println("bord"); return new Symbol(Simbolos.bord,yycolumn, yyline, yytext());
+          case 45: 
+            { ts.setToken("else",yytext(),yyline,yycolumn);System.out.println("else");return new Symbol(Simbolos.elsee,yycolumn, yyline, yytext());
             } 
             // fall through
           case 148: break;
-          case 47: 
-            { System.out.println("text"); return new Symbol(Simbolos.text,yycolumn, yyline, yytext());
+          case 46: 
+            { ts.setToken("anch",yytext(),yyline,yycolumn);System.out.println("anch"); return new Symbol(Simbolos.anch,yycolumn, yyline, yytext());
             } 
             // fall through
           case 149: break;
-          case 48: 
-            { System.out.println("fond"); return new Symbol(Simbolos.fond,yycolumn, yyline, yytext());
+          case 47: 
+            { ts.setToken("bord",yytext(),yyline,yycolumn);System.out.println("bord"); return new Symbol(Simbolos.bord,yycolumn, yyline, yytext());
             } 
             // fall through
           case 150: break;
-          case 49: 
-            { System.out.println("fals"); return new Symbol(Simbolos.fals,yycolumn, yyline, yytext());
+          case 48: 
+            { ts.setToken("text",yytext(),yyline,yycolumn);System.out.println("text"); return new Symbol(Simbolos.text,yycolumn, yyline, yytext());
             } 
             // fall through
           case 151: break;
-          case 50: 
-            { System.out.println("bot_a"); return new Symbol(Simbolos.bot_a,yycolumn, yyline, yytext());
+          case 49: 
+            { ts.setToken("fond",yytext(),yyline,yycolumn);System.out.println("fond"); return new Symbol(Simbolos.fond,yycolumn, yyline, yytext());
             } 
             // fall through
           case 152: break;
-          case 51: 
-            { System.out.println("tab_a"); return new Symbol(Simbolos.tab_a,yycolumn, yyline, yytext());
+          case 50: 
+            { ts.setToken("fals",yytext(),yyline,yycolumn);System.out.println("fals"); return new Symbol(Simbolos.fals,yycolumn, yyline, yytext());
             } 
             // fall through
           case 153: break;
-          case 52: 
-            { System.out.println("fil_a"); return new Symbol(Simbolos.fil_a,yycolumn, yyline, yytext());
+          case 51: 
+            { ts.setToken("bot_a",yytext(),yyline,yycolumn);System.out.println("bot_a"); return new Symbol(Simbolos.bot_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 154: break;
-          case 53: 
-            { System.out.println("fil_c"); return new Symbol(Simbolos.fil_c,yycolumn, yyline, yytext());
+          case 52: 
+            { ts.setToken("tab_a",yytext(),yyline,yycolumn);System.out.println("tab_a"); return new Symbol(Simbolos.tab_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 155: break;
-          case 54: 
-            { System.out.println("com_a"); return new Symbol(Simbolos.com_a,yycolumn, yyline, yytext());
+          case 53: 
+            { ts.setToken("fil_a",yytext(),yyline,yycolumn);System.out.println("fil_a"); return new Symbol(Simbolos.fil_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 156: break;
-          case 55: 
-            { System.out.println("cue_a"); estado=true; return new Symbol(Simbolos.cue_a,yycolumn, yyline, yytext());
+          case 54: 
+            { ts.setToken("fil_c",yytext(),yyline,yycolumn);System.out.println("fil_c"); return new Symbol(Simbolos.fil_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 157: break;
-          case 56: 
-            { System.out.println("ima_a"); return new Symbol(Simbolos.ima_a,yycolumn, yyline, yytext());
+          case 55: 
+            { ts.setToken("com_a",yytext(),yyline,yycolumn);System.out.println("com_a"); return new Symbol(Simbolos.com_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 158: break;
-          case 57: 
-            { System.out.println("repet");return new Symbol(Simbolos.repet,yycolumn, yyline, yytext());
+          case 56: 
+            { ts.setToken("cue_a",yytext(),yyline,yycolumn);System.out.println("cue_a"); estado=true; return new Symbol(Simbolos.cue_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 159: break;
-          case 58: 
-            { System.out.println("setP");return new Symbol(Simbolos.setP ,yycolumn, yyline, yytext());
+          case 57: 
+            { ts.setToken("ima_a",yytext(),yyline,yycolumn);System.out.println("ima_a"); return new Symbol(Simbolos.ima_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 160: break;
-          case 59: 
-            { System.out.println("setAl");return new Symbol(Simbolos.setAl,yycolumn, yyline, yytext());
+          case 58: 
+            { ts.setToken("repet",yytext(),yyline,yycolumn);System.out.println("repet");return new Symbol(Simbolos.repet,yycolumn, yyline, yytext());
             } 
             // fall through
           case 161: break;
-          case 60: 
-            { System.out.println("getP");return new Symbol(Simbolos.getP ,yycolumn, yyline, yytext());
+          case 59: 
+            { ts.setToken("setP",yytext(),yyline,yycolumn);System.out.println("setP");return new Symbol(Simbolos.setP ,yycolumn, yyline, yytext());
             } 
             // fall through
           case 162: break;
-          case 61: 
-            { System.out.println("getAl");return new Symbol(Simbolos.getAl,yycolumn, yyline, yytext());
+          case 60: 
+            { ts.setToken("setAl",yytext(),yyline,yycolumn);System.out.println("setAl");return new Symbol(Simbolos.setAl,yycolumn, yyline, yytext());
             } 
             // fall through
           case 163: break;
-          case 62: 
-            { System.out.println("com_c"); return new Symbol(Simbolos.com_c,yycolumn, yyline, yytext());
+          case 61: 
+            { ts.setToken("getP",yytext(),yyline,yycolumn);System.out.println("getP");return new Symbol(Simbolos.getP ,yycolumn, yyline, yytext());
             } 
             // fall through
           case 164: break;
-          case 63: 
-            { System.out.println("bot_c"); yybegin(TEXTO); return new Symbol(Simbolos.bot_c,yycolumn, yyline, yytext());
+          case 62: 
+            { ts.setToken("getAl",yytext(),yyline,yycolumn);System.out.println("getAl");return new Symbol(Simbolos.getAl,yycolumn, yyline, yytext());
             } 
             // fall through
           case 165: break;
-          case 64: 
-            { System.out.println("tab_c"); yybegin(TEXTO); return new Symbol(Simbolos.tab_c,yycolumn, yyline, yytext());
+          case 63: 
+            { ts.setToken("com_c",yytext(),yyline,yycolumn);System.out.println("com_c"); return new Symbol(Simbolos.com_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 166: break;
-          case 65: 
-            { System.out.println("salt");  yybegin(TEXTO);return new Symbol(Simbolos.salt,yycolumn, yyline, yytext());
+          case 64: 
+            { ts.setToken("bot_c",yytext(),yyline,yycolumn);System.out.println("bot_c"); yybegin(TEXTO); return new Symbol(Simbolos.bot_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 167: break;
-          case 66: 
-            { System.out.println("par_a"); estado=true; return new Symbol(Simbolos.par_a,yycolumn, yyline, yytext());
+          case 65: 
+            { ts.setToken("tab_c",yytext(),yyline,yycolumn);System.out.println("tab_c"); yybegin(TEXTO); return new Symbol(Simbolos.tab_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 168: break;
-          case 67: 
-            { System.out.println("tit_a"); yybegin(TEXTO); return new Symbol(Simbolos.tit_a,yycolumn, yyline, yytext());
+          case 66: 
+            { ts.setToken("salt",yytext(),yyline,yycolumn);System.out.println("salt");  yybegin(TEXTO);return new Symbol(Simbolos.salt,yycolumn, yyline, yytext());
             } 
             // fall through
           case 169: break;
-          case 68: 
-            { System.out.println("tea_a"); yybegin(TEXTO); return new Symbol(Simbolos.tea_a,yycolumn, yyline, yytext());
+          case 67: 
+            { ts.setToken("par_a",yytext(),yyline,yycolumn);System.out.println("par_a"); estado=true; return new Symbol(Simbolos.par_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 170: break;
-          case 69: 
-            { System.out.println("teb_a"); yybegin(TEXTO); return new Symbol(Simbolos.teb_a,yycolumn, yyline, yytext());
+          case 68: 
+            { ts.setToken("tit_a",yytext(),yyline,yycolumn);System.out.println("tit_a"); yybegin(TEXTO); return new Symbol(Simbolos.tit_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 171: break;
-          case 70: 
-            { System.out.println("inser");return new Symbol(Simbolos.inser,yycolumn, yyline, yytext());
+          case 69: 
+            { ts.setToken("tea_a",yytext(),yyline,yycolumn);System.out.println("tea_a"); yybegin(TEXTO); return new Symbol(Simbolos.tea_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 172: break;
-          case 71: 
-            { System.out.println("setAn");return new Symbol(Simbolos.setAn,yycolumn, yyline, yytext());
+          case 70: 
+            { ts.setToken("teb_a",yytext(),yyline,yycolumn);System.out.println("teb_a"); yybegin(TEXTO); return new Symbol(Simbolos.teb_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 173: break;
-          case 72: 
-            { System.out.println("setBo");return new Symbol(Simbolos.setBo,yycolumn, yyline, yytext());
+          case 71: 
+            { ts.setToken("inser",yytext(),yyline,yycolumn);System.out.println("inser");return new Symbol(Simbolos.inser,yycolumn, yyline, yytext());
             } 
             // fall through
           case 174: break;
-          case 73: 
-            { System.out.println("setT");return new Symbol(Simbolos.setT,yycolumn, yyline, yytext());
+          case 72: 
+            { ts.setToken("setAn",yytext(),yyline,yycolumn);System.out.println("setAn");return new Symbol(Simbolos.setAn,yycolumn, yyline, yytext());
             } 
             // fall through
           case 175: break;
-          case 74: 
-            { System.out.println("getAn");return new Symbol(Simbolos.getAn,yycolumn, yyline, yytext());
+          case 73: 
+            { ts.setToken("setBo",yytext(),yyline,yycolumn);System.out.println("setBo");return new Symbol(Simbolos.setBo,yycolumn, yyline, yytext());
             } 
             // fall through
           case 176: break;
-          case 75: 
-            { System.out.println("getBo");return new Symbol(Simbolos.getBo,yycolumn, yyline, yytext());
+          case 74: 
+            { ts.setToken("setT",yytext(),yyline,yycolumn);System.out.println("setT");return new Symbol(Simbolos.setT,yycolumn, yyline, yytext());
             } 
             // fall through
           case 177: break;
-          case 76: 
-            { System.out.println("getT");return new Symbol(Simbolos.getT,yycolumn, yyline, yytext());
+          case 75: 
+            { ts.setToken("getAn",yytext(),yyline,yycolumn);System.out.println("getAn");return new Symbol(Simbolos.getAn,yycolumn, yyline, yytext());
             } 
             // fall through
           case 178: break;
-          case 77: 
-            { System.out.println("cue_c"); return new Symbol(Simbolos.cue_c,yycolumn, yyline, yytext());
+          case 76: 
+            { ts.setToken("getBo",yytext(),yyline,yycolumn);System.out.println("getBo");return new Symbol(Simbolos.getBo,yycolumn, yyline, yytext());
             } 
             // fall through
           case 179: break;
-          case 78: 
-            { System.out.println("ima_c"); yybegin(TEXTO); return new Symbol(Simbolos.ima_c,yycolumn, yyline, yytext());
+          case 77: 
+            { ts.setToken("getT",yytext(),yyline,yycolumn);System.out.println("getT");return new Symbol(Simbolos.getT,yycolumn, yyline, yytext());
             } 
             // fall through
           case 180: break;
-          case 79: 
-            { System.out.println("tit_c"); return new Symbol(Simbolos.tit_c,yycolumn, yyline, yytext());
+          case 78: 
+            { ts.setToken("cue_c",yytext(),yyline,yycolumn);System.out.println("cue_c"); return new Symbol(Simbolos.cue_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 181: break;
-          case 80: 
-            { System.out.println("tea_c"); return new Symbol(Simbolos.tea_c,yycolumn, yyline, yytext());
+          case 79: 
+            { ts.setToken("ima_c",yytext(),yyline,yycolumn);System.out.println("ima_c"); yybegin(TEXTO); return new Symbol(Simbolos.ima_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 182: break;
-          case 81: 
-            { System.out.println("teb_c"); return new Symbol(Simbolos.teb_c,yycolumn, yyline, yytext());
+          case 80: 
+            { ts.setToken("tit_c",yytext(),yyline,yycolumn);System.out.println("tit_c"); return new Symbol(Simbolos.tit_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 183: break;
-          case 82: 
-            { System.out.println("col_a"); yybegin(TEXTO); return new Symbol(Simbolos.col_a,yycolumn, yyline, yytext());
+          case 81: 
+            { ts.setToken("tea_c",yytext(),yyline,yycolumn);System.out.println("tea_c"); return new Symbol(Simbolos.tea_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 184: break;
-          case 83: 
-            { System.out.println("esp_a"); yybegin(TEXTO);return new Symbol(Simbolos.esp_a,yycolumn, yyline, yytext());
+          case 82: 
+            { ts.setToken("teb_c",yytext(),yyline,yycolumn);System.out.println("teb_c"); return new Symbol(Simbolos.teb_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 185: break;
-          case 84: 
-            { System.out.println("col_c"); return new Symbol(Simbolos.col_c,yycolumn, yyline, yytext());
+          case 83: 
+            { ts.setToken("col_a",yytext(),yyline,yycolumn);System.out.println("col_a"); yybegin(TEXTO); return new Symbol(Simbolos.col_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 186: break;
-          case 85: 
-            { System.out.println("par_c"); yybegin(TEXTO);return new Symbol(Simbolos.par_c,yycolumn, yyline, yytext());
+          case 84: 
+            { ts.setToken("esp_a",yytext(),yyline,yycolumn);System.out.println("esp_a"); yybegin(TEXTO);return new Symbol(Simbolos.esp_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 187: break;
-          case 86: 
-            { System.out.println("esp_c"); yybegin(TEXTO);return new Symbol(Simbolos.esp_c,yycolumn, yyline, yytext());
+          case 85: 
+            { ts.setToken("col_c",yytext(),yyline,yycolumn);System.out.println("col_c"); return new Symbol(Simbolos.col_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 188: break;
-          case 87: 
-            { System.out.println("colc_a");yybegin(TEXTO); return new Symbol(Simbolos.colc_a,yycolumn, yyline, yytext());
+          case 86: 
+            { ts.setToken("par_c",yytext(),yyline,yycolumn);System.out.println("par_c"); yybegin(TEXTO);return new Symbol(Simbolos.par_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 189: break;
-          case 88: 
-            { System.out.println("cab_a"); return new Symbol(Simbolos.cab_a,yycolumn, yyline, yytext());
+          case 87: 
+            { ts.setToken("esp_c",yytext(),yyline,yycolumn);System.out.println("esp_c"); yybegin(TEXTO);return new Symbol(Simbolos.esp_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 190: break;
-          case 89: 
-            { System.out.println("alin"); return new Symbol(Simbolos.alin,yycolumn, yyline, yytext());
+          case 88: 
+            { ts.setToken("colc_a",yytext(),yyline,yycolumn);System.out.println("colc_a");yybegin(TEXTO); return new Symbol(Simbolos.colc_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 191: break;
-          case 90: 
-            { System.out.println("cre_bot");return new Symbol(Simbolos.cre_bot,yycolumn, yyline, yytext());
+          case 89: 
+            { ts.setToken("cab_a",yytext(),yyline,yycolumn);System.out.println("cab_a"); return new Symbol(Simbolos.cab_a,yycolumn, yyline, yytext());
             } 
             // fall through
           case 192: break;
-          case 91: 
-            { System.out.println("cre_tab");return new Symbol(Simbolos.cre_tab,yycolumn, yyline, yytext());
+          case 90: 
+            { ts.setToken("alin",yytext(),yyline,yycolumn);System.out.println("alin"); return new Symbol(Simbolos.alin,yycolumn, yyline, yytext());
             } 
             // fall through
           case 193: break;
-          case 92: 
-            { System.out.println("cli_bot");return new Symbol(Simbolos.cli_bot,yycolumn, yyline, yytext());
+          case 91: 
+            { ts.setToken("cre_bot",yytext(),yyline,yycolumn);System.out.println("cre_bot");return new Symbol(Simbolos.cre_bot,yycolumn, yyline, yytext());
             } 
             // fall through
           case 194: break;
-          case 93: 
-            { System.out.println("colc_c");return new Symbol(Simbolos.colc_c,yycolumn, yyline, yytext());
+          case 92: 
+            { ts.setToken("cre_tab",yytext(),yyline,yycolumn);System.out.println("cre_tab");return new Symbol(Simbolos.cre_tab,yycolumn, yyline, yytext());
             } 
             // fall through
           case 195: break;
-          case 94: 
-            { System.out.println("cab_c"); return new Symbol(Simbolos.cab_c,yycolumn, yyline, yytext());
+          case 93: 
+            { ts.setToken("cli_bot",yytext(),yyline,yycolumn);System.out.println("cli_bot");return new Symbol(Simbolos.cli_bot,yycolumn, yyline, yytext());
             } 
             // fall through
           case 196: break;
-          case 95: 
-            { System.out.println("cre_img");return new Symbol(Simbolos.cre_img,yycolumn, yyline, yytext());
+          case 94: 
+            { ts.setToken("colc_c",yytext(),yyline,yycolumn);System.out.println("colc_c");return new Symbol(Simbolos.colc_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 197: break;
-          case 96: 
-            { System.out.println("cre_tea");return new Symbol(Simbolos.cre_tea,yycolumn, yyline, yytext());
+          case 95: 
+            { ts.setToken("cab_c",yytext(),yyline,yycolumn);System.out.println("cab_c"); return new Symbol(Simbolos.cab_c,yycolumn, yyline, yytext());
             } 
             // fall through
           case 198: break;
-          case 97: 
-            { System.out.println("cre_teb");return new Symbol(Simbolos.cre_teb,yycolumn, yyline, yytext());
+          case 96: 
+            { ts.setToken("cre_img",yytext(),yyline,yycolumn);System.out.println("cre_img");return new Symbol(Simbolos.cre_img,yycolumn, yyline, yytext());
             } 
             // fall through
           case 199: break;
-          case 98: 
-            { System.out.println("cre_par");return new Symbol(Simbolos.cre_par,yycolumn, yyline, yytext());
+          case 97: 
+            { ts.setToken("cre_tea",yytext(),yyline,yycolumn);System.out.println("cre_tea");return new Symbol(Simbolos.cre_tea,yycolumn, yyline, yytext());
             } 
             // fall through
           case 200: break;
-          case 99: 
-            { System.out.println("setC");return new Symbol(Simbolos.setC,yycolumn, yyline, yytext());
+          case 98: 
+            { ts.setToken("cre_teb",yytext(),yyline,yycolumn);System.out.println("cre_teb");return new Symbol(Simbolos.cre_teb,yycolumn, yyline, yytext());
             } 
             // fall through
           case 201: break;
-          case 100: 
-            { System.out.println("getC");return new Symbol(Simbolos.getC,yycolumn, yyline, yytext());
+          case 99: 
+            { ts.setToken("cre_par",yytext(),yyline,yycolumn);System.out.println("cre_par");return new Symbol(Simbolos.cre_par,yycolumn, yyline, yytext());
             } 
             // fall through
           case 202: break;
-          case 101: 
-            { System.out.println("setA");return new Symbol(Simbolos.setA,yycolumn, yyline, yytext());
+          case 100: 
+            { ts.setToken("setC",yytext(),yyline,yycolumn);System.out.println("setC");return new Symbol(Simbolos.setC,yycolumn, yyline, yytext());
             } 
             // fall through
           case 203: break;
-          case 102: 
-            { System.out.println("getA");return new Symbol(Simbolos.getA,yycolumn, yyline, yytext());
+          case 101: 
+            { ts.setToken("getC",yytext(),yyline,yycolumn);System.out.println("getC");return new Symbol(Simbolos.getC,yycolumn, yyline, yytext());
             } 
             // fall through
           case 204: break;
+          case 102: 
+            { ts.setToken("setA",yytext(),yyline,yycolumn);System.out.println("setA");return new Symbol(Simbolos.setA,yycolumn, yyline, yytext());
+            } 
+            // fall through
+          case 205: break;
+          case 103: 
+            { ts.setToken("getA",yytext(),yyline,yycolumn);System.out.println("getA");return new Symbol(Simbolos.getA,yycolumn, yyline, yytext());
+            } 
+            // fall through
+          case 206: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

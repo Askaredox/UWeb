@@ -25,14 +25,9 @@ import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Arbol.*;
-import com.itextpdf.text.html.HtmlTags;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.swing.JEditorPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 
@@ -50,7 +45,6 @@ public class Ventana extends javax.swing.JFrame {
     JTable tabla;
     DefaultTableModel dtm;
     Runtime ejecutar=Runtime.getRuntime();
-    String nombre="";
     HTMLEditorKit kit=new HTMLEditorKit();
     public Ventana() {
         initComponents();
@@ -123,7 +117,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Página Web Resultante","Reporte de Tokens","Errores Léxicos","Errores Sintácticos"}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -278,12 +272,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int i=jComboBox1.getSelectedIndex();
-        String s=jComboBox1.getItemAt(i);
-        try {
-            ejecutar.exec("cmd.exe /K src\\Webs\\"+s+".html");
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        switch(i){
+            case 0:
+                try {
+                    ejecutar.exec("cmd.exe /K "+((ruta.equals(""))?"DEFAULT":ruta)+".html");
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 1:
+                try {
+                    ejecutar.exec("cmd.exe /K "+((ruta.equals(""))?"DEFAULT":ruta)+"_Tokens.html");
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -303,7 +314,6 @@ public class Ventana extends javax.swing.JFrame {
             file.setFileFilter(filtro);
             File abre=file.getSelectedFile();
             ruta=abre.getAbsolutePath();
-            nombre=abre.getName();
             String aux;
             
             if(abre!=null){
@@ -349,6 +359,10 @@ public class Ventana extends javax.swing.JFrame {
         try{
             Parser.parse();
             AST=Parser.getAST();
+            AST.setTs(Scanner.getTokens());
+            escritor=new FileWriter(((ruta.equals(""))?"DEFAULT":ruta)+"_Tokens.html");
+            escritor.write(AST.ts.getTokens());
+            escritor.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Algo valió madres en todo!","TODO MAL :(!!!",JOptionPane.WARNING_MESSAGE);
         }
@@ -359,16 +373,11 @@ public class Ventana extends javax.swing.JFrame {
             TablaSimbolos ts=new TablaSimbolos();
             String s=AST.ejecutar(ts, AST).toString();
             try {
-                boolean es=false;
-                String namae=("".equals(nombre)?"DEFAULT":nombre);
-                for(int i=0;i<jComboBox1.getItemCount();i++){
-                    es=namae.equals(jComboBox1.getItemAt(i));
-                    if(es) break;
-                }
-                if(!es) jComboBox1.addItem(namae);
-                escritor=new FileWriter("src/Webs/"+namae+".html");
+                escritor=new FileWriter(((ruta.equals(""))?"DEFAULT":ruta)+".html");
                 escritor.write(s);
                 escritor.close();
+                ventana();
+                
                 JOptionPane.showMessageDialog(null,"Funciona!","TODO GOOD!!!",JOptionPane.WARNING_MESSAGE);
                 for(int i=0;i<dtm.getRowCount();i++){
                     dtm.removeRow(i);
@@ -384,27 +393,8 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        int i=jComboBox1.getSelectedIndex();
-        String s=jComboBox1.getItemAt(i);
         
-        FileReader archivos;
-        String aux,texto="";
-        try {
-            archivos = new FileReader("src\\Webs\\"+s+".html");
-            BufferedReader lee=new BufferedReader(archivos);
-            while((aux=lee.readLine())!=null)
-                texto+=aux+"\n";
-            lee.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jTextArea3.setText(texto);
-        Document doc = kit.createDefaultDocument();
-        jEditorPane1.setDocument(doc);
-        //String d="<html><body><h1>bienvenido</h1></body></html>";
-        jEditorPane1.setText(texto);
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
@@ -469,6 +459,25 @@ public class Ventana extends javax.swing.JFrame {
             ruta=archivo.getPath();
             ward();
         }
+    }
+    private void ventana(){
+        FileReader archivos;
+        String aux,texto="";
+        try {
+            archivos = new FileReader(((ruta.equals(""))?"DEFAULT":ruta)+".html");
+            BufferedReader lee=new BufferedReader(archivos);
+            while((aux=lee.readLine())!=null)
+                texto+=aux+"\n";
+            lee.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTextArea3.setText(texto);
+        Document doc = kit.createDefaultDocument();
+        jEditorPane1.setDocument(doc);
+        jEditorPane1.setText(texto);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

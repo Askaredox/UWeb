@@ -15,7 +15,7 @@ parser code
        try{
             String lexema = s.value.toString();
             int fila = s.right+1;
-            int columna = s.left;
+            int columna = s.left+1;
             int tipo = s.sym;
 
             System.out.println("Error sintáctico recuperado");
@@ -30,7 +30,7 @@ parser code
        try{
             String lexema = s.value.toString();
             int fila = s.right+1;
-            int columna = s.left;
+            int columna = s.left+1;
             int tipo = s.sym;
 
             System.out.println("Error sintáctico NO recuperado");
@@ -136,6 +136,7 @@ DATA::= SALTO                                                                {:R
        |BOTTON:a                                                             {:RESULT=a;:}
        |texto:a                                                              {:RESULT=new Texto(a);:}
        |SCRIPT:a                                                             {:RESULT=a;:};
+       
 SCRIPT::=hs_a SENTS:a hs_c                                                   {:RESULT=new Script(a);:};
 SENTS::= SENTS:a SENT:b                                                      {:RESULT=a;RESULT.add(b);:}
        | SENT:b                                                              {:RESULT=new LinkedList<>();RESULT.add(b);:};

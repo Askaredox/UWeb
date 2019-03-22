@@ -7,7 +7,11 @@ public class Arbol implements Instruccion{
     private final LinkedList<Instruccion> instucciones;
     public String HTML;
     private String console="";
+    public Tokens ts;
 
+    public void setTs(Tokens ts) {
+        this.ts = ts;
+    }
     public void setConsole(String console) {
         this.console+= console;
     }
