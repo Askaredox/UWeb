@@ -11,7 +11,8 @@ public class Echo implements Instruccion{
 
     @Override
     public Object ejecutar(TablaSimbolos ts, Arbol ar) {
-        return echo.ejecutar(ts, ar)+"\n";
+        ar.setConsole(echo.ejecutar(ts, ar).toString()+"\n");
+        return "";
     }
     
 }

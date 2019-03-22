@@ -5,13 +5,29 @@ package Arbol;
 public class Objeto {
     private Tipo tipo;
     private String id;
+    private String nombre;
+    private String tabla;
     private String contenido;
     private String alineacion;
     private String path;
     private String alto;
     private String ancho;
-    private String borde;
+    private Boolean borde;
     
+
+    public String getTabla() {
+        return tabla;
+    }
+    public void setTabla(String tabla) {
+        this.tabla = tabla;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     public Objeto(Tipo tipo, String id) {
         this.tipo=tipo;
         this.id=id;
@@ -72,12 +88,14 @@ public class Objeto {
     public void setAncho(String ancho) {
         this.ancho = ancho;
     }
-
     public String getBorde() {
+        return borde.toString();
+    }
+    public Boolean getB() {
         return borde;
     }
 
-    public void setBorde(String borde) {
+    public void setBorde(Boolean borde) {
         this.borde = borde;
     }
 

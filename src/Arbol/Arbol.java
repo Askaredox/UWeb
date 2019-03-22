@@ -6,6 +6,13 @@ import java.util.LinkedList;
 public class Arbol implements Instruccion{
     private final LinkedList<Instruccion> instucciones;
     public String HTML;
+    private String console="";
+
+    public void setConsole(String console) {
+        this.console+= console;
+    }
+
+    
     public Arbol(LinkedList<Instruccion> a){
         instucciones=a;
         HTML="";
@@ -26,21 +33,21 @@ public class Arbol implements Instruccion{
             }
             
         }
+        HTML+="<HTML>\n";
         for(Instruccion ins:instucciones){
-            HTML+="<HTML>\n";
             if(ins instanceof Titulo){
                 HTML+="<HEAD>\n";
                 HTML+=ins.ejecutar(ts, ar).toString();
                 HTML+="</HEAD>\n";
             }
             else if(ins instanceof Cuerpo){
-                HTML+="<BODY>\n";
                 HTML+=ins.ejecutar(ts, ar).toString();
-                HTML+="</BODY>\n";
             }
-            HTML+="</HTML>\n";
-            
         }
+        HTML+="</HTML>\n";
         return HTML;
+    }
+    public String getConsole() {
+        return console;
     }
 }

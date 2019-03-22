@@ -45,7 +45,12 @@ public class TablaSimbolos extends LinkedList<Simbolo>{
                 return true;
         return false;
     }
-    
+    public Objeto getObjeto(String id){
+        for(Objeto s:TO)
+            if(s.getId().equals(id))
+                return s;
+        return null;
+    }
     public void addParrafo(String id, String cont){
         Objeto parr=new Objeto(Objeto.Tipo.PARRAFO,id);
         parr.setContenido(cont);
@@ -57,20 +62,37 @@ public class TablaSimbolos extends LinkedList<Simbolo>{
         parr.setAlineacion(aling);
         TO.add(parr);
     }
-    public String getParrA(String id){
-        for(Objeto s:TO){
-            if(s.getId().equals(id)){
-                return s.getAlineacion();
-            }
-        }
-        return null;
+    public void addTextoA(String id, String cont){
+        Objeto parr=new Objeto(Objeto.Tipo.TEXTOA,id);
+        parr.setContenido(cont);
+        TO.add(parr);
     }
-    public String getParrC(String id){
-        for(Objeto s:TO){
-            if(s.getId().equals(id)){
-                return s.getContenido();
-            }
-        }
-        return null;
+    public void addTextoB(String id, String cont){
+        Objeto parr=new Objeto(Objeto.Tipo.TEXTOB,id);
+        parr.setContenido(cont);
+        TO.add(parr);
+    }
+    public void addImg(String id, String path){
+        Objeto parr=new Objeto(Objeto.Tipo.IMAGEN,id);
+        parr.setPath(path);
+        TO.add(parr);
+    }
+    public void addImg(String id, String path,String alto,String ancho){
+        Objeto parr=new Objeto(Objeto.Tipo.IMAGEN,id);
+        parr.setPath(path);
+        parr.setAlto(alto);
+        parr.setAncho(ancho);
+        TO.add(parr);
+    }
+    public void addBot(String id, String nombre, String contenido){
+        Objeto parr=new Objeto(Objeto.Tipo.BOTON,id);
+        parr.setNombre(nombre);
+        parr.setContenido(contenido);
+        TO.add(parr);
+    }
+    public void addTab(String id, String tabla){
+        Objeto parr=new Objeto(Objeto.Tipo.TABLA,id);
+        parr.setTabla(tabla);
+        TO.add(parr);
     }
 }

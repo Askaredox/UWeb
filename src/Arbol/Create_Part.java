@@ -37,11 +37,34 @@ public class Create_Part implements Instruccion{
             case CRE_PARR2:
                 ts.addParrafo(id, (String)ins1.ejecutar(ts, ar));
                 break;
+            case CRE_TEA:
+                ts.addTextoA(id, (String)ins1.ejecutar(ts, ar));
+                break;
+            case CRE_TEB:
+                ts.addTextoB(id, (String)ins1.ejecutar(ts, ar));
+                break;
+            case CRE_IMG1:
+                ts.addImg(id, (String)ins1.ejecutar(ts, ar), ins2.ejecutar(ts, ar).toString(), ins3.ejecutar(ts, ar).toString());
+                break;
+            case CRE_IMG2:
+                ts.addImg(id, (String)ins1.ejecutar(ts, ar));
+                break;
+            case CRE_BOT:
+                ts.addBot(id, (String)ins1.ejecutar(ts, ar), (String)ins2.ejecutar(ts, ar));
+                break;
+            case CRE_TAB:
+                ts.addTab(id, (String)ins1.ejecutar(ts, ar));
         }
         return "";
     }
     public static enum Accion{
         CRE_PARR1,
-        CRE_PARR2
+        CRE_PARR2,
+        CRE_TEA,
+        CRE_TEB,
+        CRE_IMG1,
+        CRE_IMG2,
+        CRE_TAB,
+        CRE_BOT
     }
 }

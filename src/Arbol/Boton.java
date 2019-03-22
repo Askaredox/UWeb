@@ -14,7 +14,7 @@ public class Boton implements Instruccion{
 
     @Override
     public Object ejecutar(TablaSimbolos ts, Arbol ar) {
-        return "<button type=\"button\" name=\""+id+"\">"+texto+"</button>";
+        return "<input type=\"button\" onclick=\""+id+"()\" value=\""+texto+"\">\n";
     }
     
     

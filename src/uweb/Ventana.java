@@ -26,9 +26,15 @@ import javax.swing.JViewport;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Arbol.*;
 import com.itextpdf.text.html.HtmlTags;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.swing.JEditorPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
 
 /**
  *
@@ -44,6 +50,8 @@ public class Ventana extends javax.swing.JFrame {
     JTable tabla;
     DefaultTableModel dtm;
     Runtime ejecutar=Runtime.getRuntime();
+    String nombre="";
+    HTMLEditorKit kit=new HTMLEditorKit();
     public Ventana() {
         initComponents();
         tabla=(JTable)((JViewport)((JScrollPane)jTabbedPane2.getComponent(1)).getComponent(0)).getComponent(0);
@@ -52,6 +60,9 @@ public class Ventana extends javax.swing.JFrame {
         dtm.removeRow(2);
         dtm.removeRow(1);
         dtm.removeRow(0);
+        jEditorPane1.setEditable(false);
+        
+        jEditorPane1.setEditorKit(kit);
     }
 
     /**
@@ -72,7 +83,8 @@ public class Ventana extends javax.swing.JFrame {
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
-        jPanel2 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
@@ -111,7 +123,12 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
@@ -119,18 +136,9 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Texto Plano", jScrollPane4);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 893, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 254, Short.MAX_VALUE)
-        );
+        jScrollPane5.setViewportView(jEditorPane1);
 
-        jTabbedPane4.addTab("Vista HTML", jPanel2);
+        jTabbedPane4.addTab("Vista Previa", jScrollPane5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -251,7 +259,7 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane2)
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1))
                 .addContainerGap())
         );
@@ -269,7 +277,13 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        int i=jComboBox1.getSelectedIndex();
+        String s=jComboBox1.getItemAt(i);
+        try {
+            ejecutar.exec("cmd.exe /K src\\Webs\\"+s+".html");
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -289,6 +303,7 @@ public class Ventana extends javax.swing.JFrame {
             file.setFileFilter(filtro);
             File abre=file.getSelectedFile();
             ruta=abre.getAbsolutePath();
+            nombre=abre.getName();
             String aux;
             
             if(abre!=null){
@@ -344,7 +359,14 @@ public class Ventana extends javax.swing.JFrame {
             TablaSimbolos ts=new TablaSimbolos();
             String s=AST.ejecutar(ts, AST).toString();
             try {
-                escritor=new FileWriter("AST.html");
+                boolean es=false;
+                String namae=("".equals(nombre)?"DEFAULT":nombre);
+                for(int i=0;i<jComboBox1.getItemCount();i++){
+                    es=namae.equals(jComboBox1.getItemAt(i));
+                    if(es) break;
+                }
+                if(!es) jComboBox1.addItem(namae);
+                escritor=new FileWriter("src/Webs/"+namae+".html");
                 escritor.write(s);
                 escritor.close();
                 JOptionPane.showMessageDialog(null,"Funciona!","TODO GOOD!!!",JOptionPane.WARNING_MESSAGE);
@@ -352,38 +374,38 @@ public class Ventana extends javax.swing.JFrame {
                     dtm.removeRow(i);
                 }
                 for(Simbolo sim:ts){
-                    dtm.addRow(new Object[]{sim.getId(),sim.getTipo(),sim.getValor(),"0","0"});
+                    dtm.addRow(new Object[]{sim.getId(),sim.getTipo(),sim.getValor(),sim.getF(),sim.getC()});
                 }
+                jTextArea2.setText(AST.getConsole());
             } catch (IOException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        try{
-
-            Parser.parse();
-            AST=Parser.getAST();
-            escritor=new FileWriter("AST.txt");
-            //raiz=Parser.getRaiz();
-//            ast=new AST(raiz);
-//            err.addE(Scanner.getErrors());
-//            err.addE(Parser.getErrors());
-//            if(!err.hasErrors()){
-//                ast.analizar();
-//                infoBox("Se ha analizado correctamente el archivo", "TODO CORRECTO");
-//            }
-//            else{
-//                infoBox("Hay errores en el código fuente del archivo", "TODO MAL");
-//                writeFile(err.getE());
-//            }
-            //escritor.write(raiz.imprimir());
-            
-            //ejecutar.exec("cmd.exe /K C:\\Users\\ASKAR\\Documents\\NetBeansProjects\\UWeb\\src\\generadores\\Grafica.bat");
-            //JOptionPane.showMessageDialog(null,"Funciona!","TODO GOOD!!!",JOptionPane.WARNING_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            //JOptionPane.showMessageDialog(null,"Algo valió madres!","TODO MAL :(!!!",JOptionPane.WARNING_MESSAGE);
-        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        int i=jComboBox1.getSelectedIndex();
+        String s=jComboBox1.getItemAt(i);
+        
+        FileReader archivos;
+        String aux,texto="";
+        try {
+            archivos = new FileReader("src\\Webs\\"+s+".html");
+            BufferedReader lee=new BufferedReader(archivos);
+            while((aux=lee.readLine())!=null)
+                texto+=aux+"\n";
+            lee.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTextArea3.setText(texto);
+        Document doc = kit.createDefaultDocument();
+        jEditorPane1.setDocument(doc);
+        //String d="<html><body><h1>bienvenido</h1></body></html>";
+        jEditorPane1.setText(texto);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,6 +473,7 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -463,11 +486,11 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

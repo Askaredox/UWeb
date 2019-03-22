@@ -55,14 +55,11 @@ terminal String mas,men,por,div,igu,coma,pun,pyc,parA,parC,llavA,llavC,corA,corC
 terminal String idobj,texto,umen;
 
 non terminal INICIO;
-non terminal LinkedList<Instruccion> COMPI,ALLS,TESHS,FILAS,COLUMNS,DATAS,SENTS;
+non terminal LinkedList<Instruccion> COMPI,ALLS,TESHS,FILAS,COLUMNS,DATAS,SENTS,ARRAY,ARRAYS;
 non terminal Instruccion CABECERA,CUERPO,ALL,PARRAFO,TESH,TEXTOA,TEXTOB,ESPACIO,IMAGEN,BOTTON,TABLA,FILA,COLUMN,DATA,SCRIPT,SENT,ECHO,OPER,DECL;
-non terminal Instruccion IF,REPETIR,INSERTAR;
+non terminal Instruccion IF,REPETIR,INSERTAR,GET_PART,SET_PART,CRE_PART;
 non terminal String TITULO,FONDO,SALTO,ALIGN,IMG;
 non terminal LinkedList<String> IMGS;
-
-
-non terminal GET_PART,SET_PART,CRE_PART,ARRAY,ARRAYS;
 
 precedence left pun;
 
@@ -147,10 +144,10 @@ SENT::= DECL:a                                                               {:R
       | IF:a                                                                 {:RESULT=a;:}
       | REPETIR:a                                                            {:RESULT=a;:}
       | INSERTAR:a                                                           {:RESULT=a;:}
-      | SET_PART                                                             {::}
-      | CRE_PART                                                             {::};
+      | SET_PART:a                                                           {:RESULT=a;:}
+      | CRE_PART:a                                                           {:RESULT=a;:};
 
-DECL::=idvar:a igu OPER:b pyc                                                {:RESULT=new Declaracion(a,b);:};
+DECL::=idvar:a igu OPER:b pyc                                                {:RESULT=new Declaracion(a,b,aright+1,aleft+1);:};
 OPER::= men OPER:a                                                           {:RESULT=new Operacion(Operacion.Oper.NEG,a);:}%prec umen
       | OPER:a mas OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.SUMA,a,b);:}
       | OPER:a men OPER:b                                                    {:RESULT=new Operacion(Operacion.Oper.RESTA,a,b);:}
@@ -173,37 +170,37 @@ OPER::= men OPER:a                                                           {:R
       | idvar:a                                                              {:RESULT=new Operacion(Operacion.Oper.ID,a);:}
       | tru:a                                                                {:RESULT=new Operacion(Operacion.Oper.TRUE,a);:}
       | fals:a                                                               {:RESULT=new Operacion(Operacion.Oper.FALSE,a);:}
-      | GET_PART:a                                                           {::};
+      | GET_PART:a                                                           {:RESULT=a;:};
 
 ECHO::= echo OPER:a pyc                                                      {:RESULT=new Echo(a);:};
 IF::= ife parA OPER:a parC llavA SENTS:b llavC                               {:RESULT=new If_Sent(a,b);:}
     | ife parA OPER:a parC llavA SENTS:b llavC elsee llavA SENTS:c llavC     {:RESULT=new If_Sent(a,b,c);:};
 REPETIR::= repet parA OPER:a parC llavA SENTS:b llavC                        {:RESULT=new Repetir(a,b);:};
-INSERTAR::= idobj pun inser parA parC pyc;
-CRE_PART::= idobj igu cre_par parA OPER coma OPER parC pyc
-          | idobj igu cre_par parA OPER parC pyc
-          | idobj igu cre_tea parA OPER parC pyc
-          | idobj igu cre_teb parA OPER parC pyc
-          | idobj igu cre_img parA OPER coma OPER coma OPER parC pyc
-          | idobj igu cre_img parA OPER parC pyc
-          | idobj igu cre_tab parA ARRAYS parC pyc
-          | idobj igu cre_bot parA OPER coma OPER parC pyc;
-SET_PART::=idobj pun setA parA OPER parC pyc
-          |idobj pun setC parA OPER parC pyc
-          |idobj pun setP parA OPER parC pyc
-          |idobj pun setAl parA OPER parC pyc
-          |idobj pun setAn parA OPER parC pyc
-          |idobj pun setBo parA OPER parC pyc
-          |idobj pun setT parA OPER parC pyc
-          |idobj pun cli_bot parA OPER parC pyc;
-GET_PART::=idobj pun getA parA parC
-          |idobj pun getC parA parC
-          |idobj pun getP parA parC
-          |idobj pun getAl parA parC
-          |idobj pun getAn parA parC
-          |idobj pun getBo parA parC
-          |idobj pun getT parA parC;
-ARRAYS::= ARRAYS coma corA ARRAY corC
-        | corA ARRAY corC;
-ARRAY::= DATAS coma OPER
-       | OPER;
+INSERTAR::= idobj:a pun inser parA parC pyc                                  {:RESULT=new Insertar(a);:};
+CRE_PART::= idobj:a igu cre_par parA OPER:b coma OPER:c parC pyc             {:RESULT=new Create_Part(Create_Part.Accion.CRE_PARR1,a,b,c);:}
+          | idobj:a igu cre_par parA OPER:b parC pyc                         {:RESULT=new Create_Part(Create_Part.Accion.CRE_PARR2,a,b);:}
+          | idobj:a igu cre_tea parA OPER:b parC pyc                         {:RESULT=new Create_Part(Create_Part.Accion.CRE_TEA,a,b);:}
+          | idobj:a igu cre_teb parA OPER:b parC pyc                         {:RESULT=new Create_Part(Create_Part.Accion.CRE_TEB,a,b);:}
+          | idobj:a igu cre_img parA OPER:b coma OPER:c coma OPER:d parC pyc {:RESULT=new Create_Part(Create_Part.Accion.CRE_IMG1,a,b,c,d);:}
+          | idobj:a igu cre_img parA OPER:b parC pyc                         {:RESULT=new Create_Part(Create_Part.Accion.CRE_IMG2,a,b);:}
+          | idobj:a igu cre_tab parA ARRAYS:b parC pyc                       {:RESULT=new Create_Part(Create_Part.Accion.CRE_TAB,a,new Lines(b));:}
+          | idobj:a igu cre_bot parA OPER:b coma OPER:c parC pyc             {:RESULT=new Create_Part(Create_Part.Accion.CRE_BOT,a,b,c);:};
+SET_PART::=idobj:a pun setA parA OPER:b parC pyc                             {:RESULT=new Set_Part(Set_Part.Accion.SET_ALI,a,b);:}
+          |idobj:a pun setC parA OPER:b parC pyc                             {:RESULT=new Set_Part(Set_Part.Accion.SET_C,a,b);:}
+          |idobj:a pun setP parA OPER:b parC pyc                             {:RESULT=new Set_Part(Set_Part.Accion.SET_P,a,b);:}
+          |idobj:a pun setAl parA OPER:b parC pyc                            {:RESULT=new Set_Part(Set_Part.Accion.SET_AL,a,b);:}
+          |idobj:a pun setAn parA OPER:b parC pyc                            {:RESULT=new Set_Part(Set_Part.Accion.SET_AN,a,b);:}
+          |idobj:a pun setBo parA OPER:b parC pyc                            {:RESULT=new Set_Part(Set_Part.Accion.SET_B,a,b);:}
+          |idobj:a pun setT parA OPER:b parC pyc                             {:RESULT=new Set_Part(Set_Part.Accion.SET_T,a,b);:}
+          |idobj:a pun cli_bot parA OPER:b parC pyc                          {:RESULT=new Set_Part(Set_Part.Accion.SET_CLI,a,b);:};
+GET_PART::=idobj:a pun getA parA parC                                        {:RESULT=new Get_Part(Get_Part.Accion.GET_ALI,a);:}
+          |idobj:a pun getC parA parC                                        {:RESULT=new Get_Part(Get_Part.Accion.GET_C,a);:}
+          |idobj:a pun getP parA parC                                        {:RESULT=new Get_Part(Get_Part.Accion.GET_P,a);:}
+          |idobj:a pun getAl parA parC                                       {:RESULT=new Get_Part(Get_Part.Accion.GET_AL,a);:}
+          |idobj:a pun getAn parA parC                                       {:RESULT=new Get_Part(Get_Part.Accion.GET_AN,a);:}
+          |idobj:a pun getBo parA parC                                       {:RESULT=new Get_Part(Get_Part.Accion.GET_B,a);:}
+          |idobj:a pun getT parA parC                                        {:RESULT=new Get_Part(Get_Part.Accion.GET_T,a);:};
+ARRAYS::= ARRAYS:a coma corA ARRAY:b corC                                    {:RESULT=a;RESULT.add(new Cols(b));:}
+        | corA ARRAY:a corC                                                  {:RESULT=new LinkedList<>();RESULT.add(new Cols(a));:};
+ARRAY::= ARRAY:a coma OPER:b                                                 {:RESULT=a;RESULT.add(b);:}
+       | OPER:a                                                              {:RESULT=new LinkedList<>();RESULT.add(a);:};

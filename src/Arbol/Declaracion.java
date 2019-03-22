@@ -6,10 +6,14 @@ public class Declaracion implements Instruccion{
     private final String id;
     private Simbolo.Tipo tipo;
     private final Instruccion instruccion;
+    private int f;
+    private int c;
     
-    public Declaracion(String id,Instruccion instruccion){
+    public Declaracion(String id,Instruccion instruccion,int fi,int co){
         this.id=id;
         this.instruccion=instruccion;
+        f=fi;
+        c=co;
     }
     
     @Override
@@ -31,7 +35,7 @@ public class Declaracion implements Instruccion{
             ts.setValor(id, valor);
         }
         else{
-            Simbolo aux=new Simbolo(tipo, id);
+            Simbolo aux=new Simbolo(tipo, id,f,c);
             aux.setValor(valor);
             ts.add(aux);
         }
