@@ -7,30 +7,33 @@ parser code
 {:
     public Arbol AST;
     public Arbol getAST(){
-        return AST;
+       	return AST;
     }
-
+    Errores err=new Errores();
+    public Errores getErrors(){
+        return err;
+    }
     public void syntax_error(Symbol s)
     {
-       try{
-            String lexema = s.value.toString();
-            int fila = s.right+1;
-            int columna = s.left;
-            int tipo = s.sym;
+		try{
+			String lexema = s.value.toString();
+			int fila = s.right+1;
+			int columna = s.left+1;
+			int tipo = s.sym;
 
-            System.out.println("Error sintáctico recuperado");
-            System.out.println("Lexema:"+lexema);
-            System.out.println("Fila:"+fila);
-            System.out.println("Columna:"+columna);
-            System.out.println("tipo:"+tipo);
-            //action_obj.err.addE("SINTACTICO", lexema, fila, columna, "Se esperaba otra cosa");
-       }catch(NullPointerException ex){}
+			System.out.println("Error sintáctico recuperado");
+			System.out.println("Lexema:"+lexema);
+			System.out.println("Fila:"+fila);
+			System.out.println("Columna:"+columna);
+			System.out.println("tipo:"+tipo);
+			err.addE("SINTACTICO", lexema, fila, columna);
+		}catch(NullPointerException ex){}
     }
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
-       try{
+       	try{
             String lexema = s.value.toString();
             int fila = s.right+1;
-            int columna = s.left;
+            int columna = s.left+1;
             int tipo = s.sym;
 
             System.out.println("Error sintáctico NO recuperado");
@@ -38,7 +41,7 @@ parser code
             System.out.println("Fila:"+fila);
             System.out.println("Columna:"+columna);
             System.out.println("tipo:"+tipo);
-       }catch(NullPointerException ex){}
+       	}catch(NullPointerException ex){}
     }
 :}
 
@@ -79,7 +82,8 @@ start with INICIO;
 /* ------------------- 3ra Area: Reglas Semanticas -------------------*/
 INICIO::= COMPI:a                                                            {:parser.AST=new Arbol(a);:};
 COMPI::= com_a CABECERA:a CUERPO:b com_c                                     {:RESULT=new LinkedList<>();RESULT.add(a);RESULT.add(b);:}
-       | com_a CUERPO:a CABECERA:b com_c                                     {:RESULT=new LinkedList<>();RESULT.add(a);RESULT.add(b);:};
+       | com_a CUERPO:a CABECERA:b com_c                                     {:RESULT=new LinkedList<>();RESULT.add(a);RESULT.add(b);:}
+       | error;
 CABECERA::= cab_a TITULO:a cab_c                                             {:RESULT=new Titulo(a);:};
 TITULO::= tit_a texto:a tit_c                                                {:RESULT=new String(a);:};
 CUERPO::= cue_a FONDO:a cie ALLS:b cue_c                                     {:RESULT=new Cuerpo(a,b);:}
@@ -135,7 +139,9 @@ DATA::= SALTO                                                                {:R
        |IMAGEN:a                                                             {:RESULT=a;:}
        |BOTTON:a                                                             {:RESULT=a;:}
        |texto:a                                                              {:RESULT=new Texto(a);:}
-       |SCRIPT:a                                                             {:RESULT=a;:};
+       |SCRIPT:a                                                             {:RESULT=a;:}
+       | error;
+/* ------------------- COMIENZO DE PARTE DEL HSCRIPT -------------------*/
 SCRIPT::=hs_a SENTS:a hs_c                                                   {:RESULT=new Script(a);:};
 SENTS::= SENTS:a SENT:b                                                      {:RESULT=a;RESULT.add(b);:}
        | SENT:b                                                              {:RESULT=new LinkedList<>();RESULT.add(b);:};
@@ -145,7 +151,8 @@ SENT::= DECL:a                                                               {:R
       | REPETIR:a                                                            {:RESULT=a;:}
       | INSERTAR:a                                                           {:RESULT=a;:}
       | SET_PART:a                                                           {:RESULT=a;:}
-      | CRE_PART:a                                                           {:RESULT=a;:};
+      | CRE_PART:a                                                           {:RESULT=a;:}
+      | error;
 
 DECL::=idvar:a igu OPER:b pyc                                                {:RESULT=new Declaracion(a,b,aright+1,aleft+1);:};
 OPER::= men OPER:a                                                           {:RESULT=new Operacion(Operacion.Oper.NEG,a);:}%prec umen
@@ -170,7 +177,8 @@ OPER::= men OPER:a                                                           {:R
       | idvar:a                                                              {:RESULT=new Operacion(Operacion.Oper.ID,a);:}
       | tru:a                                                                {:RESULT=new Operacion(Operacion.Oper.TRUE,a);:}
       | fals:a                                                               {:RESULT=new Operacion(Operacion.Oper.FALSE,a);:}
-      | GET_PART:a                                                           {:RESULT=a;:};
+      | GET_PART:a                                                           {:RESULT=a;:}
+      | error;
 
 ECHO::= echo OPER:a pyc                                                      {:RESULT=new Echo(a);:};
 IF::= ife parA OPER:a parC llavA SENTS:b llavC                               {:RESULT=new If_Sent(a,b);:}

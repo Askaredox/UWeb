@@ -3,19 +3,16 @@
 package analizadores;
 import java_cup.runtime.*;
 import Arbol.Tokens;
-
+import Arbol.Errores;
 /*-------------------- 2da Area: Opciones y Declaraciones --------------------*/
 
 %%
 %{
 //---------------> Codigo Java
-/*
     Errores err=new Errores();
     public Errores getErrors(){
         return err;
     }
-*/
-
     StringBuffer string = new StringBuffer();
     boolean estado=false;
     Tokens ts=new Tokens();
@@ -169,45 +166,42 @@ dec =[0-9]+"."[0-9]+
 <HS> "["                        {ts.setToken("corA",yytext(),yyline,yycolumn);System.out.println("corA   |"+yytext());return new Symbol(Simbolos.corA,yycolumn, yyline, yytext());}
 <HS> "]"                        {ts.setToken("corC",yytext(),yyline,yycolumn);System.out.println("corC   |"+yytext());return new Symbol(Simbolos.corC,yycolumn, yyline, yytext());}
 
-
 //-------------------> Expresiones Regulares
 
-<YYINITIAL> {cad}           {ts.setToken("cad",yytext(),yyline,yycolumn);System.out.println("cad    |"+yytext());return new Symbol(Simbolos.cad,yycolumn, yyline, (yytext()).substring(1,yytext().length()-1));}
-<YYINITIAL> {num}           {ts.setToken("num",yytext(),yyline,yycolumn);System.out.println("num    |"+yytext());return new Symbol(Simbolos.num,yycolumn, yyline, yytext());}
-<YYINITIAL> {com}           {yybegin(TEXTO);}
+<YYINITIAL> {cad}               {ts.setToken("cad",yytext(),yyline,yycolumn);System.out.println("cad    |"+yytext());return new Symbol(Simbolos.cad,yycolumn, yyline, (yytext()).substring(1,yytext().length()-1));}
+<YYINITIAL> {num}               {ts.setToken("num",yytext(),yyline,yycolumn);System.out.println("num    |"+yytext());return new Symbol(Simbolos.num,yycolumn, yyline, yytext());}
+<YYINITIAL> {com}               {yybegin(TEXTO);}
 
-<HS> {idvar}                {ts.setToken("idvar",yytext(),yyline,yycolumn);System.out.println("idvar  |"+yytext());return new Symbol(Simbolos.idvar,yycolumn, yyline, yytext());}
-<HS> {idobj}                {ts.setToken("idobj",yytext(),yyline,yycolumn);System.out.println("idobj  |"+yytext());return new Symbol(Simbolos.idobj,yycolumn, yyline, yytext());}
-<HS> {cad}                  {ts.setToken("cad",(yytext()).substring(1,yytext().length()-1),yyline,yycolumn);System.out.println("cad    |"+yytext());return new Symbol(Simbolos.cad,yycolumn, yyline, (yytext()).substring(1,yytext().length()-1));}
-<HS> {num}                  {ts.setToken("num",yytext(),yyline,yycolumn);System.out.println("num    |"+yytext());return new Symbol(Simbolos.num,yycolumn, yyline, yytext());}
-<HS> {dec}                  {ts.setToken("dec",yytext(),yyline,yycolumn);System.out.println("dec    |"+yytext());return new Symbol(Simbolos.dec,yycolumn, yyline, yytext());}
-<HS> {comm}                 {}
-<HS> {commm}                {}
-
+<HS> {idvar}                    {ts.setToken("idvar",yytext(),yyline,yycolumn);System.out.println("idvar  |"+yytext());return new Symbol(Simbolos.idvar,yycolumn, yyline, yytext());}
+<HS> {idobj}                    {ts.setToken("idobj",yytext(),yyline,yycolumn);System.out.println("idobj  |"+yytext());return new Symbol(Simbolos.idobj,yycolumn, yyline, yytext());}
+<HS> {cad}                      {ts.setToken("cad",(yytext()).substring(1,yytext().length()-1),yyline,yycolumn);System.out.println("cad    |"+yytext());return new Symbol(Simbolos.cad,yycolumn, yyline, (yytext()).substring(1,yytext().length()-1));}
+<HS> {num}                      {ts.setToken("num",yytext(),yyline,yycolumn);System.out.println("num    |"+yytext());return new Symbol(Simbolos.num,yycolumn, yyline, yytext());}
+<HS> {dec}                      {ts.setToken("dec",yytext(),yyline,yycolumn);System.out.println("dec    |"+yytext());return new Symbol(Simbolos.dec,yycolumn, yyline, yytext());}
+<HS> {comm}                     {}
+<HS> {commm}                    {}
 
 <TEXTO> {
-        [^"<"]+             {string.setLength(0); string.append(yytext()); }
-        "<"                 {
-                                if(!(string.length()==0||string.toString().matches("[ \t\r\n\f]+"))){
-                                    String e=string.toString().replace("\t","").replace("\r","").replace("\n","");
-                                    System.out.println("texto  |"+e); 
-                                    yypushback(1); 
-                                    yybegin(YYINITIAL);
-                                    ts.setToken("texto",e,yyline,yycolumn);
-                                    return new Symbol(Simbolos.texto, yycolumn, yyline, e); 
+        [^"<"]+                 {string.setLength(0); string.append(yytext()); }
+        "<"                     {
+                                    if(!(string.length()==0||string.toString().matches("[ \t\r\n\f]+"))){
+                                        String e=string.toString().replace("\t","").replace("\r","").replace("\n","");
+                                        System.out.println("texto  |"+e); 
+                                        yypushback(1); 
+                                        yybegin(YYINITIAL);
+                                        ts.setToken("texto",e,yyline,yycolumn);
+                                        return new Symbol(Simbolos.texto, yycolumn, yyline, e); 
+                                    }
+                                    else {  
+                                        yypushback(1); 
+                                        yybegin(YYINITIAL);
+                                    }
                                 }
-                                else {  
-                                    yypushback(1); 
-                                    yybegin(YYINITIAL);
-                                }
-                            }
-        
 }
 
 //------------------> Espacios en blanco
-[ \t\r\n\f]      {/* Espacios en blanco */}
+[ \t\r\n\f]                     {/* Espacios en blanco */}
 //------------------> Errores Lexicos
-.                           {
-                                System.out.println("Error Lexico '"+yytext()+"' Linea "+yyline+1+" Columna "+yycolumn);
-                                //err.addE("LEXICO", yytext(), yyline+1, yycolumn, "Simbolo fuera de este lenguaje");
-                            }
+.                               {
+                                    System.out.println("Error Lexico '"+yytext()+"' Linea "+(yyline+1)+" Columna "+yycolumn);
+                                    err.addE("LEXICO", yytext(), (yyline+1), yycolumn);
+                                }

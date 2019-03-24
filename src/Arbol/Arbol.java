@@ -8,9 +8,15 @@ public class Arbol implements Instruccion{
     public String HTML;
     private String console="";
     public Tokens ts;
+    public Errores te;
 
     public void setTs(Tokens ts) {
         this.ts = ts;
+    }
+    public void addTE(Errores tee){
+        for(Error e:tee){
+            te.add(e);
+        }
     }
     public void setConsole(String console) {
         this.console+= console;
@@ -20,6 +26,7 @@ public class Arbol implements Instruccion{
     public Arbol(LinkedList<Instruccion> a){
         instucciones=a;
         HTML="";
+        te=new Errores();
     }
     
     @Override

@@ -5,7 +5,7 @@
 package analizadores;
 import java_cup.runtime.*;
 import Arbol.Tokens;
-
+import Arbol.Errores;
 /*-------------------- 2da Area: Opciones y Declaraciones --------------------*/
 
 
@@ -441,13 +441,10 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
 
   /* user code: */
 //---------------> Codigo Java
-/*
     Errores err=new Errores();
     public Errores getErrors(){
         return err;
     }
-*/
-
     StringBuffer string = new StringBuffer();
     boolean estado=false;
     Tokens ts=new Tokens();
@@ -824,8 +821,8 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.println("Error Lexico '"+yytext()+"' Linea "+yyline+1+" Columna "+yycolumn);
-                                //err.addE("LEXICO", yytext(), yyline+1, yycolumn, "Simbolo fuera de este lenguaje");
+            { System.out.println("Error Lexico '"+yytext()+"' Linea "+(yyline+1)+" Columna "+yycolumn);
+                                    err.addE("LEXICO", yytext(), (yyline+1), yycolumn);
             } 
             // fall through
           case 104: break;
@@ -860,17 +857,17 @@ public class Analisis_Lexico implements java_cup.runtime.Scanner {
           case 109: break;
           case 7: 
             { if(!(string.length()==0||string.toString().matches("[ \t\r\n\f]+"))){
-                                    String e=string.toString().replace("\t","").replace("\r","").replace("\n","");
-                                    System.out.println("texto  |"+e); 
-                                    yypushback(1); 
-                                    yybegin(YYINITIAL);
-                                    ts.setToken("texto",e,yyline,yycolumn);
-                                    return new Symbol(Simbolos.texto, yycolumn, yyline, e); 
-                                }
-                                else {  
-                                    yypushback(1); 
-                                    yybegin(YYINITIAL);
-                                }
+                                        String e=string.toString().replace("\t","").replace("\r","").replace("\n","");
+                                        System.out.println("texto  |"+e); 
+                                        yypushback(1); 
+                                        yybegin(YYINITIAL);
+                                        ts.setToken("texto",e,yyline,yycolumn);
+                                        return new Symbol(Simbolos.texto, yycolumn, yyline, e); 
+                                    }
+                                    else {  
+                                        yypushback(1); 
+                                        yybegin(YYINITIAL);
+                                    }
             } 
             // fall through
           case 110: break;

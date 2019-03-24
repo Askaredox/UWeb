@@ -118,11 +118,6 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Página Web Resultante","Reporte de Tokens","Errores Léxicos","Errores Sintácticos"}));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
@@ -186,6 +181,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Nuevo");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,6 +190,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Abrir");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +200,7 @@ public class Ventana extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Guardar");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +209,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Guardar Como...");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +219,7 @@ public class Ventana extends javax.swing.JFrame {
         jMenu1.add(jMenuItem4);
         jMenu1.add(jSeparator2);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Compilar");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,6 +240,11 @@ public class Ventana extends javax.swing.JFrame {
         jMenu2.add(jSeparator3);
 
         jMenuItem8.setText("Acerca de...");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
@@ -288,10 +293,18 @@ public class Ventana extends javax.swing.JFrame {
                 }
                 break;
             case 2:
-                
+                try {
+                    ejecutar.exec("cmd.exe /K "+((ruta.equals(""))?"DEFAULT":ruta)+"_E_LEXICOS.html");
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             case 3:
-                
+                try {
+                    ejecutar.exec("cmd.exe /K "+((ruta.equals(""))?"DEFAULT":ruta)+"_E_SINTACTICOS.html");
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
         }
         
@@ -331,7 +344,6 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // SAVE FILE
         try {
             if("".equals(ruta)) wardho();
             else ward();
@@ -360,42 +372,62 @@ public class Ventana extends javax.swing.JFrame {
             Parser.parse();
             AST=Parser.getAST();
             AST.setTs(Scanner.getTokens());
+            AST.addTE(Scanner.getErrors());
+            AST.addTE(Parser.getErrors());
             escritor=new FileWriter(((ruta.equals(""))?"DEFAULT":ruta)+"_Tokens.html");
             escritor.write(AST.ts.getTokens());
             escritor.close();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Algo valió madres en todo!","TODO MAL :(!!!",JOptionPane.WARNING_MESSAGE);
-        }
-        if(AST==null){
             JOptionPane.showMessageDialog(null,"Algo valió madres en la sintaxis o el lexico!","TODO MAL :(!!!",JOptionPane.WARNING_MESSAGE);
         }
-        else{
-            TablaSimbolos ts=new TablaSimbolos();
-            String s=AST.ejecutar(ts, AST).toString();
-            try {
-                escritor=new FileWriter(((ruta.equals(""))?"DEFAULT":ruta)+".html");
-                escritor.write(s);
-                escritor.close();
-                ventana();
-                
-                JOptionPane.showMessageDialog(null,"Funciona!","TODO GOOD!!!",JOptionPane.WARNING_MESSAGE);
-                for(int i=0;i<dtm.getRowCount();i++){
-                    dtm.removeRow(i);
+        if(AST!=null){
+            if(AST.te.isEmpty()){
+                try {
+                    TablaSimbolos ts=new TablaSimbolos();
+                    String s=AST.ejecutar(ts, AST).toString();
+                    escritor=new FileWriter(((ruta.equals(""))?"DEFAULT":ruta)+".html");
+                    escritor.write(s);
+                    escritor.close();
+                    ventana();
+
+                    JOptionPane.showMessageDialog(null,"Funciona!","TODO GOOD!!!",JOptionPane.WARNING_MESSAGE);
+                    for(int i=0;i<dtm.getRowCount();i++){
+                        dtm.removeRow(i);
+                    }
+                    for(Simbolo sim:ts){
+                        
+                        dtm.addRow(new Object[]{sim.getId(),sim.getTipo(),sim.getValor(),sim.getF(),sim.getC()});
+                    }
+                    jTextArea2.setText(AST.getConsole());
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NullPointerException ex) {
+                    JOptionPane.showMessageDialog(null,"Algo valió madres en la ejecución del arbol: un NULL!","TODO MAL :(!!!",JOptionPane.WARNING_MESSAGE);
                 }
-                for(Simbolo sim:ts){
-                    dtm.addRow(new Object[]{sim.getId(),sim.getTipo(),sim.getValor(),sim.getF(),sim.getC()});
-                }
-                jTextArea2.setText(AST.getConsole());
-            } catch (IOException ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
+            else{
+                JOptionPane.showMessageDialog(null,"Hay errores Léxicos o Sintácticos!","TODO MAL :(!!!",JOptionPane.WARNING_MESSAGE);
+                try {
+                    escritor=new FileWriter(((ruta.equals(""))?"DEFAULT":ruta)+"_E_SINTACTICOS.html");
+                    escritor.write(AST.te.getErrores(true));
+                    escritor.close();
+                    escritor=new FileWriter(((ruta.equals(""))?"DEFAULT":ruta)+"_E_LEXICOS.html");
+                    escritor.write(AST.te.getErrores(false));
+                    escritor.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Algo valió madres en el arbol!","TODO MAL :(!!!",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        JOptionPane.showMessageDialog(null,"CURSO: ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1 \nSECCIÓN: C \nNOMBRE: ANDRÉS ESTEBAN CARVAJAL MORALES \nCARNET: 201612272 ","INFORMACION DEL ESTUDIANTE",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments

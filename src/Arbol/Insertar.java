@@ -53,7 +53,7 @@ public class Insertar implements Instruccion{
                 ss="<input type=\"button\" onclick=\""+o.getNombre()+"()\" value=\""+o.getContenido()+"\">\n";
                 break;
             case TABLA:
-                ss="<table"+(o.getB()?" border=\"2px\"":"")+">\n"+o.getTabla()+"</table>\n";
+                ss="<table style=\"width:100%\""+(o.getB()?" border=\"2px\"":"")+">\n"+o.getTabla()+"</table>\n";
                 break;
         }
         return ss;

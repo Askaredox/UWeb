@@ -18,7 +18,7 @@ public class Tabla implements Instruccion{
 
     @Override
     public Object ejecutar(TablaSimbolos ts, Arbol ar) {
-        String ss="<table"+borde+">\n";
+        String ss="<table style=\"width:100%\""+borde+">\n";
         for(Instruccion ins:filas){
             ss+=ins.ejecutar(ts, ar);
         }

@@ -18,6 +18,12 @@ public class Simbolo {
         return id;
     }
     public Object getValor(){
+        switch(tipo){
+            case NUMERO:return Integer.parseInt(valor.toString());
+            case CADENA:return valor.toString();
+            case BOOLEAN:return Boolean.parseBoolean(valor.toString());
+            case DECIMAL:return Double.parseDouble(valor.toString());
+        }
         return valor;
     }
     public int getF(){
